@@ -5,16 +5,23 @@
   
 
   
-  <title>Tag: elliptic curve | sandmanhome</title>
+  <title>nodejs Array join | sandmanhome</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="life is wonderful">
-<meta property="og:type" content="website">
-<meta property="og:title" content="sandmanhome">
-<meta property="og:url" content="http://yoursite.com/tags/elliptic-curve/index.html">
+  <meta name="description" content="Array 和 Uint8Array 初始化new Array(3) 初始化为 3个 undefine 元素的 []new Uint8Array(3) 初始化为 3个 ‘0’ 元素的 [] Array join12console.log(new Array(3).join(&#39;0&#39;)) &#x2F;&#x2F; 输出: &quot;00&quot;console.log(new Ui">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodejs Array join">
+<meta property="og:url" content="http://yoursite.com/2020/03/25/nodejs-array-join/index.html">
 <meta property="og:site_name" content="sandmanhome">
-<meta property="og:description" content="life is wonderful">
+<meta property="og:description" content="Array 和 Uint8Array 初始化new Array(3) 初始化为 3个 undefine 元素的 []new Uint8Array(3) 初始化为 3个 ‘0’ 元素的 [] Array join12console.log(new Array(3).join(&#39;0&#39;)) &#x2F;&#x2F; 输出: &quot;00&quot;console.log(new Ui">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-25T09:47:10.000Z">
+<meta property="article:modified_time" content="2020-04-10T03:00:20.754Z">
 <meta property="article:author" content="sandman">
+<meta property="article:tag" content="Array">
+<meta property="article:tag" content="Uint8Array">
+<meta property="article:tag" content="join">
+<meta property="article:tag" content="pad">
+<meta property="article:tag" content="nodejs">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="sandmanhome" type="application/atom+xml">
@@ -64,40 +71,65 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/03/18/cryptology-elliptic-curve/" class="archive-article-date">
-  <time datetime="2020-03-18T09:28:42.000Z" itemprop="datePublished">Mar 18</time>
+        <section id="main"><article id="post-nodejs-array-join" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/25/nodejs-array-join/" class="article-date">
+  <time datetime="2020-03-25T09:47:10.000Z" itemprop="datePublished">2020-03-25</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/18/cryptology-elliptic-curve/">密码学 椭圆曲线</a>
+    <h1 class="article-title" itemprop="name">
+      nodejs Array join
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Array-和-Uint8Array-初始化"><a href="#Array-和-Uint8Array-初始化" class="headerlink" title="Array 和 Uint8Array 初始化"></a>Array 和 Uint8Array 初始化</h3><p>new Array(3) 初始化为 3个 undefine 元素的 []<br>new Uint8Array(3) 初始化为 3个 ‘0’ 元素的 []</p>
+<h3 id="Array-join"><a href="#Array-join" class="headerlink" title="Array join"></a>Array join</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log(new Array(3).join(&#39;0&#39;)) &#x2F;&#x2F; 输出: &quot;00&quot;</span><br><span class="line">console.log(new Uint8Array(3).join(&#39;0&#39;)) &#x2F;&#x2F; 输出: &quot;00000&quot;</span><br></pre></td></tr></table></figure>
 
+<h3 id="leftPad-的两种实现，运用-Uint8Array-和-Array-的区别"><a href="#leftPad-的两种实现，运用-Uint8Array-和-Array-的区别" class="headerlink" title="leftPad 的两种实现，运用 Uint8Array 和 Array 的区别"></a>leftPad 的两种实现，运用 Uint8Array 和 Array 的区别</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function leftPadByUint8Array(input, num) &#123;</span><br><span class="line">  if (input.length &gt;&#x3D; num) return input</span><br><span class="line"></span><br><span class="line">  return (new Uint8Array(num - input.length)).join(&#39;&#39;) + input</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function leftPadByArray(input, num) &#123;</span><br><span class="line">  if (input.length &gt;&#x3D; num) return input</span><br><span class="line"></span><br><span class="line">  return (new Array(num - input.length + 1)).join(&#39;0&#39;) + input</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(leftPadByUint8Array(&#39;00567&#39;, 8) &#x3D;&#x3D; leftPadByArray(&#39;0567&#39;, 8))</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/25/nodejs-array-join/" data-id="ck8tn1fay0003xdaq1urj231y" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Array/" rel="tag">Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Uint8Array/" rel="tag">Uint8Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/join/" rel="tag">join</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pad/" rel="tag">pad</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/01/router-merlin-RT-AC68U/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          路由 梅林 RT-AC68U
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/18/cryptology-elliptic-curve/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">密码学 椭圆曲线</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         
