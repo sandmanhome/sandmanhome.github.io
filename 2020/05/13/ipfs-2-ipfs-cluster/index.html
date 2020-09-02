@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ipfs (2) ipfs-cluster | sandmanhome</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ipfs 私有网络搭建ipfs-cluster 集群搭建192.168.100.4 192.168.100.5 192.168.100.241 组成私有网络, 选取 192.168.100.241 为管理节点采用 ipfs-cluster-ctl 管理文件  管理节点部署 ipfs-cluster-service  记录如下 secret 和 cluster的管理节点信息 12345678910">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ipfs (2) ipfs-cluster">
+<meta property="og:url" content="http://yoursite.com/2020/05/13/ipfs-2-ipfs-cluster/index.html">
+<meta property="og:site_name" content="sandmanhome">
+<meta property="og:description" content="ipfs 私有网络搭建ipfs-cluster 集群搭建192.168.100.4 192.168.100.5 192.168.100.241 组成私有网络, 选取 192.168.100.241 为管理节点采用 ipfs-cluster-ctl 管理文件  管理节点部署 ipfs-cluster-service  记录如下 secret 和 cluster的管理节点信息 12345678910">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/05/13/ipfs-2-ipfs-cluster/ipfs.png?170*">
+<meta property="article:published_time" content="2020-05-13T08:13:06.000Z">
+<meta property="article:modified_time" content="2020-05-13T10:25:13.355Z">
+<meta property="article:author" content="sandman">
+<meta property="article:tag" content="ipfs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/13/ipfs-2-ipfs-cluster/ipfs.png?170*">
+  
+    <link rel="alternate" href="/atom.xml" title="sandmanhome" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<script src="/js/hexo_resize_image.js"></script>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">sandmanhome</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ipfs-2-ipfs-cluster" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/13/ipfs-2-ipfs-cluster/" class="article-date">
+  <time datetime="2020-05-13T08:13:06.000Z" itemprop="datePublished">2020-05-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ipfs (2) ipfs-cluster
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/2020/05/13/ipfs-2-ipfs-cluster/ipfs.png?170*" alt="ipfs"></p>
+<h3 id="ipfs-私有网络搭建"><a href="#ipfs-私有网络搭建" class="headerlink" title="ipfs 私有网络搭建"></a>ipfs 私有网络搭建</h3><h3 id="ipfs-cluster-集群搭建"><a href="#ipfs-cluster-集群搭建" class="headerlink" title="ipfs-cluster 集群搭建"></a>ipfs-cluster 集群搭建</h3><p>192.168.100.4 192.168.100.5 192.168.100.241 组成私有网络, 选取 192.168.100.241 为管理节点采用 <strong>ipfs-cluster-ctl</strong> 管理文件</p>
+<ul>
+<li>管理节点部署 ipfs-cluster-service</li>
+</ul>
+<p>记录如下 secret 和 cluster的管理节点信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">mkdir ipfs-cluster</span><br><span class="line"><span class="built_in">cd</span> ipfs-cluster</span><br><span class="line">wget https://dist.ipfs.io/ipfs-cluster-service/v0.12.1/ipfs-cluster-service_v0.12.1_linux-amd64.tar.gz</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">tar -xvzf ipfs-cluster-service_v0.12.1_linux-amd64.tar.gz</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">./ipfs-cluster-service/ipfs-cluster-service init</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">./ipfs-cluster-service/ipfs-cluster-service daemon &amp;</span><br><span class="line">[2] 88693</span><br><span class="line">16:41:34.958  INFO    service: Initializing. For verbose output run with <span class="string">"-l debug"</span>. Please <span class="built_in">wait</span>... daemon.go:46</span><br><span class="line">➜  ipfs-cluster 16:41:35.449  INFO    cluster: IPFS Cluster v0.12.1 listening on:</span><br><span class="line">        /ip4/127.0.0.1/tcp/9096/p2p/12D3KooWEdwm9Q7MXvZrYeMujrQ5fCzJwfJQX75gtSdTyYMpRozf</span><br><span class="line">        /ip4/192.168.100.241/tcp/9096/p2p/12D3KooWEdwm9Q7MXvZrYeMujrQ5fCzJwfJQX75gtSdTyYMpRozf</span><br><span class="line">        /ip4/127.0.0.1/udp/9096/quic/p2p/12D3KooWEdwm9Q7MXvZrYeMujrQ5fCzJwfJQX75gtSdTyYMpRozf</span><br><span class="line">        /ip4/192.168.100.241/udp/9096/quic/p2p/12D3KooWEdwm9Q7MXvZrYeMujrQ5fCzJwfJQX75gtSdTyYMpRozf</span><br><span class="line"></span><br><span class="line">cat ~/.ipfs-cluster/service.json|grep secret</span><br><span class="line">    <span class="string">"secret"</span>: <span class="string">"8e3d96c01821b7f238e805fb28d6b873d09f279d1ff9e63aa3528848f79b73c3"</span>,</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>节点部署 ipfs-cluster-service</li>
+</ul>
+<p><code>ipfs-cluster-service daemon  --bootstrap</code> 指定管理节点</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ipfs-cluster</span><br><span class="line">wget https://dist.ipfs.io/ipfs-cluster-service/v0.12.1/ipfs-cluster-service_v0.12.1_linux-amd64.tar.gz</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">tar -xvzf ipfs-cluster-service_v0.12.1_linux-amd64.tar.gz</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">./ipfs-cluster-service/ipfs-cluster-service init</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">sed -i <span class="string">'s/"secret".*/"secret": "8e3d96c01821b7f238e805fb28d6b873d09f279d1ff9e63aa3528848f79b73c3",/'</span> ~/.ipfs-cluster/service.json</span><br><span class="line"></span><br><span class="line">./ipfs-cluster-service/ipfs-cluster-service daemon  --bootstrap /ip4/192.168.100.241/tcp/9096/p2p/12D3KooWEdwm9Q7MXvZrYeMujrQ5fCzJwfJQX75gtSdTyYMpRozf &amp;</span><br><span class="line">...</span><br><span class="line">09:04:53.291  INFO    cluster: ** IPFS Cluster is READY ** cluster.go:655</span><br><span class="line">09:04:53.681  INFO    cluster: 12D3KooW9qFBb2K7TPRW7s654LJJM19hseGZBcvde6Hpe3sNVkWu: joined 12D3KooWEdwm9Q7MXvZrYeMujrQ5fCzJwfJQX75gtSdTyYMpRozf<span class="string">'s cluster cluster.go:993</span></span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>管理节点部署 ipfs-cluster-service</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ipfs-cluster</span><br><span class="line"></span><br><span class="line">wget https://dist.ipfs.io/ipfs-cluster-service/v0.12.1/ipfs-cluster-ctl_v0.12.1_linux-amd64.tar.gz</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">tar -xvzf ipfs-cluster-ctl_v0.12.1_linux-amd64.tar.gz</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">cp ipfs-cluster-ctl/ipfs-cluster-ctl /usr/<span class="built_in">local</span>/bin</span><br><span class="line">ipfs-cluster-ctl peers ls</span><br><span class="line">17:14:13.571  INFO restapilog: 127.0.0.1 - - [13/May/2020:17:14:13 +0800] <span class="string">"GET /peers HTTP/1.1"</span> 200 6641</span><br><span class="line"> restapi.go:117</span><br><span class="line">12D3KooW9qFBb2K7TPRW7s654LJJM19hseGZBcvde6Hpe3sNVkWu | xxxxxx | Sees 2 other peers</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h3 id="ipfs-cluster-pin-测试"><a href="#ipfs-cluster-pin-测试" class="headerlink" title="ipfs-cluster pin 测试"></a>ipfs-cluster pin 测试</h3><ul>
+<li>管理节点添加文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> a &gt; a.txt</span><br><span class="line">ipfs-cluster-ctl a.txt</span><br><span class="line">added Qmbvkmk9LFsGneteXk3G7YLqtLVME566ho6ibaQZZVHaC9 a.txt</span><br><span class="line">17:24:10.699  INFO    cluster: pinning Qmbvkmk9LFsGneteXk3G7YLqtLVME566ho6ibaQZZVHaC9 on [12D3KooW9qFBb2K7TPRW7s654LJJM19hseGZBcvde6Hpe3sNVkWu 12D3KooWEdwm9Q7MXvZrYeMujrQ5fCzJwfJQX75gtSdTyYMpRozf 12D3KooWSKPbWzmnhjRrpi4EVz6NTCnYE6rfZLc1gzLQFdd4sHb6]: cluster.go:1400</span><br><span class="line">17:24:10.700  INFO       crdt: new pin added: Qmbvkmk9LFsGneteXk3G7YLqtLVME566ho6ibaQZZVHaC9 consensus.go:209</span><br><span class="line">17:24:10.700  INFO       crdt: adding new DAG head: QmZUnZo3dva57M29Ky2fTPqbEDaWnJWKnUMYMoYkxYpLFU (height: 1) heads.go:114</span><br><span class="line">17:24:10.701  INFO      adder: Qmbvkmk9LFsGneteXk3G7YLqtLVME566ho6ibaQZZVHaC9 successfully added to cluster adder.go:182</span><br><span class="line">17:24:10.701  INFO restapilog: 127.0.0.1 - - [13/May/2020:17:24:10 +0800] <span class="string">"POST /add?chunker=size-262144&amp;cid-version=0&amp;hash=sha2-256&amp;hidden=false&amp;layout=&amp;local=false&amp;name=&amp;nocopy=false&amp;progress=false&amp;raw-leaves=false&amp;recursive=false&amp;replication-max=0&amp;replication-min=0&amp;shard=false&amp;shard-size=104857600&amp;stream-channels=true&amp;user-allocations=&amp;wrap-with-directory=false HTTP/1.1"</span> 200 88</span><br><span class="line"> restapi.go:117</span><br><span class="line">➜  ipfs-cluster-ctl 17:24:10.803  INFO   ipfshttp: IPFS Pin request succeeded:  Qmbvkmk9LFsGneteXk3G7YLqtLVME566ho6ibaQZZVHaC9 ipfshttp.go:372</span><br><span class="line"></span><br><span class="line">ipfs pin ls |grep Qmbvkmk9LFsGneteXk3G7YLqtLVME566ho6ibaQZZVHaC9</span><br><span class="line">Qmbvkmk9LFsGneteXk3G7YLqtLVME566ho6ibaQZZVHaC9 recursive</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>节点测试副本</li>
+</ul>
+<p>192.168.100.4 及 192.168.100.5 均存在副本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ipfs pin ls |grep Qmbvkmk9LFsGneteXk3G7YLqtLVME566ho6ibaQZZVHaC9</span><br><span class="line">Qmbvkmk9LFsGneteXk3G7YLqtLVME566ho6ibaQZZVHaC9 recursive</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/13/ipfs-2-ipfs-cluster/" data-id="ckel91no7000082aq4x55bp6v" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ipfs/" rel="tag">ipfs</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/09/02/ipfs-3-autonat-md/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ipfs (3) autonat
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/05/08/ipfs-1-file-distribution/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ipfs (1) 文件分发</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/" rel="tag">Array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAS/" rel="tag">NAS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RT-AC68U/" rel="tag">RT-AC68U</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Uint8Array/" rel="tag">Uint8Array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/autonat/" rel="tag">autonat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmake/" rel="tag">cmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cryptology/" rel="tag">cryptology</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ecdsa/" rel="tag">ecdsa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elliptic-curve/" rel="tag">elliptic curve</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/findpackage/" rel="tag">findpackage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flow/" rel="tag">flow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go-libp2p-autonat/" rel="tag">go-libp2p-autonat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hostAddr/" rel="tag">hostAddr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ipfs/" rel="tag">ipfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ipfs-repo-gc/" rel="tag">ipfs repo gc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/join/" rel="tag">join</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/merlin/" rel="tag">merlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl-update/" rel="tag">openssl update</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pad/" rel="tag">pad</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pin/" rel="tag">pin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pkg-search-module/" rel="tag">pkg_search_module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/" rel="tag">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/record/" rel="tag">record</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/router/" rel="tag">router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tproxy/" rel="tag">tproxy</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Array/" style="font-size: 10px;">Array</a> <a href="/tags/NAS/" style="font-size: 10px;">NAS</a> <a href="/tags/RT-AC68U/" style="font-size: 10px;">RT-AC68U</a> <a href="/tags/Uint8Array/" style="font-size: 10px;">Uint8Array</a> <a href="/tags/autonat/" style="font-size: 10px;">autonat</a> <a href="/tags/cmake/" style="font-size: 10px;">cmake</a> <a href="/tags/cryptology/" style="font-size: 10px;">cryptology</a> <a href="/tags/ecdsa/" style="font-size: 10px;">ecdsa</a> <a href="/tags/elliptic-curve/" style="font-size: 10px;">elliptic curve</a> <a href="/tags/findpackage/" style="font-size: 10px;">findpackage</a> <a href="/tags/flow/" style="font-size: 10px;">flow</a> <a href="/tags/go-libp2p-autonat/" style="font-size: 10px;">go-libp2p-autonat</a> <a href="/tags/hostAddr/" style="font-size: 10px;">hostAddr</a> <a href="/tags/ipfs/" style="font-size: 20px;">ipfs</a> <a href="/tags/ipfs-repo-gc/" style="font-size: 10px;">ipfs repo gc</a> <a href="/tags/join/" style="font-size: 10px;">join</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/merlin/" style="font-size: 10px;">merlin</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/openssl-update/" style="font-size: 10px;">openssl update</a> <a href="/tags/pad/" style="font-size: 10px;">pad</a> <a href="/tags/pin/" style="font-size: 10px;">pin</a> <a href="/tags/pkg-search-module/" style="font-size: 10px;">pkg_search_module</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/record/" style="font-size: 10px;">record</a> <a href="/tags/router/" style="font-size: 10px;">router</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/tproxy/" style="font-size: 10px;">tproxy</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/02/ipfs-3-autonat-md/">ipfs (3) autonat</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/13/ipfs-2-ipfs-cluster/">ipfs (2) ipfs-cluster</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/08/ipfs-1-file-distribution/">ipfs (1) 文件分发</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/10/proxy-flow/">流量引导方案</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/01/router-merlin-RT-AC68U/">路由 梅林 RT-AC68U</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 sandman<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

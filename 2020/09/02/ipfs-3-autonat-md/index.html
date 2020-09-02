@@ -5,18 +5,21 @@
   
 
   
-  <title>Hello World | sandmanhome</title>
+  <title>ipfs (3) autonat | sandmanhome</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="hostAddr机制hostAddr查询与运用123456789101112131415ipfs id&amp;#123;        &quot;ID&quot;: &quot;bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg&quot;,        &quot;PublicKey&quot;: &quot;CAQSIQMXKhfeoAepfrHLesbR+6QXV5EbBDoz&#x2F;e1+g9">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2020/02/24/hello-world/index.html">
+<meta property="og:title" content="ipfs (3) autonat">
+<meta property="og:url" content="http://yoursite.com/2020/09/02/ipfs-3-autonat-md/index.html">
 <meta property="og:site_name" content="sandmanhome">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="hostAddr机制hostAddr查询与运用123456789101112131415ipfs id&amp;#123;        &quot;ID&quot;: &quot;bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg&quot;,        &quot;PublicKey&quot;: &quot;CAQSIQMXKhfeoAepfrHLesbR+6QXV5EbBDoz&#x2F;e1+g9">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-02-24T05:55:25.511Z">
-<meta property="article:modified_time" content="2020-04-08T11:01:37.879Z">
+<meta property="article:published_time" content="2020-09-02T07:37:57.000Z">
+<meta property="article:modified_time" content="2020-09-02T10:42:53.664Z">
 <meta property="article:author" content="sandman">
+<meta property="article:tag" content="autonat">
+<meta property="article:tag" content="hostAddr">
+<meta property="article:tag" content="go-libp2p-autonat">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="sandmanhome" type="application/atom+xml">
@@ -67,10 +70,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-ipfs-3-autonat-md" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/02/24/hello-world/" class="article-date">
-  <time datetime="2020-02-24T05:55:25.511Z" itemprop="datePublished">2020-02-24</time>
+    <a href="/2020/09/02/ipfs-3-autonat-md/" class="article-date">
+  <time datetime="2020-09-02T07:37:57.000Z" itemprop="datePublished">2020-09-02</time>
 </a>
     
   </div>
@@ -81,7 +84,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      ipfs (3) autonat
     </h1>
   
 
@@ -89,52 +92,64 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <h2 id="hostAddr机制"><a href="#hostAddr机制" class="headerlink" title="hostAddr机制"></a>hostAddr机制</h2><h3 id="hostAddr查询与运用"><a href="#hostAddr查询与运用" class="headerlink" title="hostAddr查询与运用"></a>hostAddr查询与运用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ipfs id</span><br><span class="line">&#123;</span><br><span class="line">        <span class="string">"ID"</span>: <span class="string">"bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg"</span>,</span><br><span class="line">        <span class="string">"PublicKey"</span>: <span class="string">"CAQSIQMXKhfeoAepfrHLesbR+6QXV5EbBDoz/e1+g9DvUw7ABw=="</span>,</span><br><span class="line">        <span class="string">"Addresses"</span>: [</span><br><span class="line">                <span class="string">"/ip4/127.0.0.1/tcp/4001/p2p/bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg"</span>,</span><br><span class="line">                <span class="string">"/ip4/192.168.100.242/tcp/4001/p2p/bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg"</span>,</span><br><span class="line">                <span class="string">"/ip6/::1/tcp/4001/p2p/bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg"</span>,</span><br><span class="line">                <span class="string">"/ip6/fe80::7adc:71f6:25a4:40e0/tcp/4001/p2p/bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg"</span>,</span><br><span class="line">                <span class="string">"/dns4/xxx.baasze.com/tcp/4001/p2p/bafzm3jqbec7ulhfmm7s7ydt2mf32nbsjy4237mvzj5skzbkxrfxz7axghsyum/p2p-circuit/p2p/bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg"</span>,</span><br><span class="line">                <span class="string">"/ip4/xx.xx.xx.xx/tcp/4001/p2p/bafzm3jqbec7ulhfmm7s7ydt2mf32nbsjy4237mvzj5skzbkxrfxz7axghsyum/p2p-circuit/p2p/bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"AgentVersion"</span>: <span class="string">"go-ipfs/0.3.4/183988a"</span>,</span><br><span class="line">        <span class="string">"ProtocolVersion"</span>: <span class="string">"ipfs/0.1.0"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-<h3 id="enable-img"><a href="#enable-img" class="headerlink" title="enable img"></a>enable img</h3><ol>
-<li><p>在根目录下配置文件_config.yml 中有 post_asset_folder:false 改为 true</p>
+<p><code>ipfs id</code> 命令可显示ipfs节点信息，其中Addresses为服务地址即hostAddr, ipfs 会将hostAddr广播出去, 其余节点会利用hostAddr的地址进行连接, 因此通过hostAddr能否连接节点是<strong>节点互联的关键</strong>.</p>
+<h3 id="hostAddr的初始化"><a href="#hostAddr的初始化" class="headerlink" title="hostAddr的初始化"></a>hostAddr的初始化</h3><p>ipfs 启动后默认监听 “/ip4/0.0.0.0/tcp/0” “/ip6/::/tcp/0”, 此时 ipfs 查询本机各网卡地址并进行监听, 复杂网络环境下有如下几种情况:</p>
+<ul>
+<li><p>云主机通常采用经典网络模式分配的ECS固定公网IP, 在本机网卡上可见公网ip, 因此hostAddr的可查询到此公网ip</p>
 </li>
-<li><p>安装插件</p>
+<li><p>云主机通常采用弹性公网ip <strong>EIP（Elastic IP Address）</strong>访问, 在主机上网卡上不可见公网ip,因此hostAddr的<strong>无法查询到此公网ip</strong></p>
+</li>
+</ul>
+<h3 id="hostAddr的更新"><a href="#hostAddr的更新" class="headerlink" title="hostAddr的更新"></a>hostAddr的更新</h3><p>对于部署在无外网网卡ip主机的ipfs, 若依靠广播初始化后的hostAddr, 无法被其余节点主动连接, 即 Inbound 无法走通, 因此 libp2p 设计了autonat、autorelay等机制</p>
+<h2 id="autonat机制"><a href="#autonat机制" class="headerlink" title="autonat机制"></a>autonat机制</h2><h3 id="autonat基本原理"><a href="#autonat基本原理" class="headerlink" title="autonat基本原理"></a>autonat基本原理</h3><p><a href="http://github.com/libp2p/go-libp2p-autonat" target="_blank" rel="noopener">go-libp2p-autonat</a> 运用remotePeer（对端节点）<strong>DialBack(回拨)机制</strong>来获取自身服务的外网IP及端口, 其过程如下:</p>
+<ol>
+<li><p>全网中开启autonat service的某节点A, 该节点在p2p网络中支持<strong>autonat协议（”/libp2p/autonat/1.0.0”）</strong></p>
+</li>
+<li><p>节点B主动连接上支持 autonat service的节点, 此连接为后续协议交互的连接, 包括 identify 协议和 autonat协议</p>
+</li>
+<li><p>节点B在与A完成身份认证后判断节点A是否支持autonat协议, 若支持则由节点B的 autonat client 发起公网地址拨号请求(DialBack)</p>
+</li>
+<li><p>节点A的autonat service 收到DialBack请求后对节点B进行DialBack <strong>(回拨的地址为节点B的hostAddr以及已有连接的节点B地址)</strong>, 并将结果observations（包含Multiaddr及Reachability）发送给节点B</p>
+</li>
+<li><p>节点B根据DialBack的结果判断自身是 ReachabilityPublic 还是 ReachabilityPrivate, 并补充更新 hostAddr</p>
 </li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https://github.com/7ym0n/hexo-asset-image --save</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>应用图片<br>_posts 目录下会有同名目录,文章中引用目录下的 test.jpg</li>
+<h3 id="autonat优化"><a href="#autonat优化" class="headerlink" title="autonat优化"></a>autonat优化</h3><p>除了上述基本功能外, autonat还做了一些额外的优化</p>
+<ol>
+<li><p>节点B启动动态定时器主动对Peerstore的节点进行autonat协议探测以便获取自身最新的nat状态</p>
+</li>
+<li><p>对于网络状态的翻转（flipping)设定一个confidence, confidence的增加代表对当前状态的自信心（[0,3]）, 根据是否翻转以及confidence的值决定是否触发网络状态的改变, 修改hostAddr</p>
+</li>
+<li><p>confidence小于最大值时, 1.的探测定时器为固定时长(15 min), 否则对探测定时器做如下调整</p>
+</li>
+<li><p>当为外网可访问状态时，若最新的外网节点主动连接（Inbound Conn)成功且比最新的探测时间晚, 则延长1.的探测定时器时长, 段时间虚无继续探测</p>
+</li>
+<li><p>当为外网不可访问状态时，若最新的外网节点主动连接（Inbound Conn)成功且比最新的探测时间晚, 减小1.的探测定时器时长以变获取最新的外网地址</p>
+</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![说明文字](test.jpg)</span><br></pre></td></tr></table></figure>
+<p>总结:目前ipfs中默认开启了autonat service及autonat探测</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/24/hello-world/" data-id="ck702v2v60000a72vdtuo8klf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/09/02/ipfs-3-autonat-md/" data-id="ckel91noh000382aq0jloazvk" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/autonat/" rel="tag">autonat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go-libp2p-autonat/" rel="tag">go-libp2p-autonat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hostAddr/" rel="tag">hostAddr</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2020/03/04/record-openssl-update/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          openssl update
-        
-      </div>
-    </a>
   
+    <a href="/2020/05/13/ipfs-2-ipfs-cluster/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ipfs (2) ipfs-cluster</div>
+    </a>
   
 </nav>
 
