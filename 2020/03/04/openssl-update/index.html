@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>openssl update | sandman memo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="openssl 升级至 1.1.1d下载openssl-1.1.1d123cd &#x2F;usr&#x2F;local&#x2F;src&#x2F;wget https:&#x2F;&#x2F;www.openssl.org&#x2F;source&#x2F;openssl-1.1.1d.tar.gztar xf openssl-1.1.1d.tar.gz  编译openssl1234sudo yum -y install gcc zlib zlib-develcd ope">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openssl update">
+<meta property="og:url" content="http://example.com/2020/03/04/openssl-update/index.html">
+<meta property="og:site_name" content="sandman memo">
+<meta property="og:description" content="openssl 升级至 1.1.1d下载openssl-1.1.1d123cd &#x2F;usr&#x2F;local&#x2F;src&#x2F;wget https:&#x2F;&#x2F;www.openssl.org&#x2F;source&#x2F;openssl-1.1.1d.tar.gztar xf openssl-1.1.1d.tar.gz  编译openssl1234sudo yum -y install gcc zlib zlib-develcd ope">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-04T09:04:51.000Z">
+<meta property="article:modified_time" content="2021-03-23T09:18:24.426Z">
+<meta property="article:author" content="zidao Fan">
+<meta property="article:tag" content="openssl">
+<meta property="article:tag" content="cmake">
+<meta property="article:tag" content="findpackage">
+<meta property="article:tag" content="pkg_search_module">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="sandman memo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<script src="/js/hexo_resize_image.js"></script>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">sandman memo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-openssl-update" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/03/04/openssl-update/" class="article-date">
+  <time class="dt-published" datetime="2020-03-04T09:04:51.000Z" itemprop="datePublished">2020-03-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      openssl update
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="openssl-升级至-1-1-1d"><a href="#openssl-升级至-1-1-1d" class="headerlink" title="openssl 升级至 1.1.1d"></a>openssl 升级至 1.1.1d</h1><h2 id="下载openssl-1-1-1d"><a href="#下载openssl-1-1-1d" class="headerlink" title="下载openssl-1.1.1d"></a>下载openssl-1.1.1d</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/src/</span><br><span class="line">wget https://www.openssl.org/<span class="built_in">source</span>/openssl-1.1.1d.tar.gz</span><br><span class="line">tar xf openssl-1.1.1d.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h2 id="编译openssl"><a href="#编译openssl" class="headerlink" title="编译openssl"></a>编译openssl</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y install gcc zlib zlib-devel</span><br><span class="line"><span class="built_in">cd</span> openssl-1.1.1d</span><br><span class="line">./config --prefix=/usr/<span class="built_in">local</span>/openssl shared zlib</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置openssl-1-1-1d"><a href="#配置openssl-1-1-1d" class="headerlink" title="配置openssl-1.1.1d"></a>配置openssl-1.1.1d</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/bin/openssl /usr/bin/openssl.old</span><br><span class="line">ln -sf /usr/<span class="built_in">local</span>/openssl/bin/openssl /usr/bin/openssl</span><br><span class="line">ln -s /usr/<span class="built_in">local</span>/openssl/lib/libssl.so.1.1 /usr/lib64/libssl.so.1.1</span><br><span class="line">ln -s /usr/<span class="built_in">local</span>/openssl/lib/libcrypto.so.1.1 /usr/lib64/libcrypto.so.1.1</span><br><span class="line">sudo <span class="built_in">echo</span> <span class="string">&quot;/usr/local/openssl/lib/&quot;</span> &gt; /etc/ld.so.conf.d/openssl_1.1.1.conf</span><br><span class="line">sudo ldconfig -v </span><br><span class="line">/usr/bin/openssl version</span><br></pre></td></tr></table></figure>
+
+<h1 id="cmake-引用openssl-1-1-1d"><a href="#cmake-引用openssl-1-1-1d" class="headerlink" title="cmake 引用openssl-1.1.1d"></a>cmake 引用openssl-1.1.1d</h1><h2 id="find-package-引用-openssl-1-1-1d"><a href="#find-package-引用-openssl-1-1-1d" class="headerlink" title="find_package 引用 openssl-1.1.1d"></a>find_package 引用 openssl-1.1.1d</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required( VERSION 3.8 )</span><br><span class="line"></span><br><span class="line">project( <span class="built_in">test</span> )</span><br><span class="line"><span class="built_in">set</span>( OPENSSL_ROOT_DIR <span class="string">&quot;/usr/local/openssl&quot;</span> )</span><br><span class="line"><span class="built_in">set</span>( OPENSSL_INCLUDE_DIR <span class="string">&quot;/usr/local/openssl/include&quot;</span> )</span><br><span class="line"></span><br><span class="line">find_package( OpenSSL REQUIRED )</span><br><span class="line">message( <span class="string">&quot;OPENSSL_VERSION: &quot;</span> <span class="variable">$&#123;OPENSSL_VERSION&#125;</span> )</span><br><span class="line">message( <span class="string">&quot;OPENSSL_INCLUDE_DIR: &quot;</span> <span class="variable">$&#123;OPENSSL_INCLUDE_DIR&#125;</span> )</span><br><span class="line">message( <span class="string">&quot;OPENSSL_LIBRARIES: &quot;</span> <span class="variable">$&#123;OPENSSL_LIBRARIES&#125;</span> )</span><br></pre></td></tr></table></figure>
+
+<h2 id="pkg-search-module-引用-openssl-1-1-1d"><a href="#pkg-search-module-引用-openssl-1-1-1d" class="headerlink" title="pkg_search_module 引用 openssl-1.1.1d"></a>pkg_search_module 引用 openssl-1.1.1d</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required( VERSION 3.8 )</span><br><span class="line"></span><br><span class="line">project( <span class="built_in">test</span> )</span><br><span class="line"></span><br><span class="line">find_package( PkgConfig REQUIRED )</span><br><span class="line"><span class="built_in">set</span>(ENV&#123;PKG_CONFIG_PATH&#125;  <span class="string">&quot;/usr/local/openssl/lib/pkgconfig&quot;</span> )</span><br><span class="line">pkg_search_module( LIBCRYPTO REQUIRED libcrypt )</span><br><span class="line">message( <span class="string">&quot;LIBCRYPTO_VERSION: &quot;</span> <span class="variable">$&#123;LIBCRYPTO_VERSION&#125;</span> )</span><br><span class="line"></span><br><span class="line">pkg_search_module( LIBSSL REQUIRED libssl )</span><br><span class="line">message( <span class="string">&quot;LIBSSL_VERSION: &quot;</span> <span class="variable">$&#123;LIBSSL_VERSION&#125;</span> )</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/03/04/openssl-update/" data-id="ckmmvgaey0008d12v1txp4eo3" data-title="openssl update" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cmake/" rel="tag">cmake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/findpackage/" rel="tag">findpackage</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openssl/" rel="tag">openssl</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pkg-search-module/" rel="tag">pkg_search_module</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/03/18/elliptic-curve/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          椭圆曲线加密
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/24/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/" rel="tag">Array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAS/" rel="tag">NAS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RT-AC68U/" rel="tag">RT-AC68U</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Uint8Array/" rel="tag">Uint8Array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/autonat/" rel="tag">autonat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/" rel="tag">cluster</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmake/" rel="tag">cmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cryptology/" rel="tag">cryptology</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dnat/" rel="tag">dnat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ecdsa/" rel="tag">ecdsa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elliptic-curve/" rel="tag">elliptic curve</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/findpackage/" rel="tag">findpackage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go-libp2p-autonat/" rel="tag">go-libp2p-autonat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hostAddr/" rel="tag">hostAddr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ipfs/" rel="tag">ipfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meilin/" rel="tag">meilin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nf-conntrack/" rel="tag">nf_conntrack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs-join/" rel="tag">nodejs join</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/" rel="tag">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pin/" rel="tag">pin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pkg-search-module/" rel="tag">pkg_search_module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/" rel="tag">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/repo-gc/" rel="tag">repo gc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tproxy/" rel="tag">tproxy</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Array/" style="font-size: 10px;">Array</a> <a href="/tags/NAS/" style="font-size: 10px;">NAS</a> <a href="/tags/RT-AC68U/" style="font-size: 10px;">RT-AC68U</a> <a href="/tags/Uint8Array/" style="font-size: 10px;">Uint8Array</a> <a href="/tags/autonat/" style="font-size: 10px;">autonat</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/cmake/" style="font-size: 10px;">cmake</a> <a href="/tags/cryptology/" style="font-size: 10px;">cryptology</a> <a href="/tags/dnat/" style="font-size: 10px;">dnat</a> <a href="/tags/ecdsa/" style="font-size: 10px;">ecdsa</a> <a href="/tags/elliptic-curve/" style="font-size: 10px;">elliptic curve</a> <a href="/tags/findpackage/" style="font-size: 10px;">findpackage</a> <a href="/tags/go-libp2p-autonat/" style="font-size: 10px;">go-libp2p-autonat</a> <a href="/tags/hostAddr/" style="font-size: 10px;">hostAddr</a> <a href="/tags/ipfs/" style="font-size: 20px;">ipfs</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/meilin/" style="font-size: 10px;">meilin</a> <a href="/tags/nf-conntrack/" style="font-size: 10px;">nf_conntrack</a> <a href="/tags/nodejs-join/" style="font-size: 10px;">nodejs join</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/pin/" style="font-size: 10px;">pin</a> <a href="/tags/pkg-search-module/" style="font-size: 10px;">pkg_search_module</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/repo-gc/" style="font-size: 10px;">repo gc</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/tproxy/" style="font-size: 10px;">tproxy</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/02/ipfs-3-autonat/">ipfs-3-autonat</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/13/ipfs-2-cluster/">ipfs cluster</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/08/ipfs-1-file-distribution/">ipfs 文件分发</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/10/traffic-interception/">流量拦截</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/01/router-meilin-rt-ac68u/">路由器 梅林 RT-AC68U</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 zidao Fan<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

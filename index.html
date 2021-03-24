@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>sandman memo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="sandman memo">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="sandman memo">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="zidao Fan">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="sandman memo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<script src="/js/hexo_resize_image.js"></script>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">sandman memo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-ipfs-3-autonat" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/09/02/ipfs-3-autonat/" class="article-date">
+  <time class="dt-published" datetime="2020-09-02T03:03:16.000Z" itemprop="datePublished">2020-09-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/09/02/ipfs-3-autonat/">ipfs-3-autonat</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="hostAddr机制"><a href="#hostAddr机制" class="headerlink" title="hostAddr机制"></a>hostAddr机制</h1><h2 id="hostAddr查询与运用"><a href="#hostAddr查询与运用" class="headerlink" title="hostAddr查询与运用"></a>hostAddr查询与运用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ipfs id</span><br><span class="line">&#123;</span><br><span class="line">        <span class="string">&quot;ID&quot;</span>: <span class="string">&quot;bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg&quot;</span>,</span><br><span class="line">        <span class="string">&quot;PublicKey&quot;</span>: <span class="string">&quot;CAQSIQMXKhfeoAepfrHLesbR+6QXV5EbBDoz/e1+g9DvUw7ABw==&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Addresses&quot;</span>: [</span><br><span class="line">                <span class="string">&quot;/ip4/127.0.0.1/tcp/4001/p2p/bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg&quot;</span>,</span><br><span class="line">                <span class="string">&quot;/ip4/192.168.100.242/tcp/4001/p2p/bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg&quot;</span>,</span><br><span class="line">                <span class="string">&quot;/ip6/::1/tcp/4001/p2p/bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg&quot;</span>,</span><br><span class="line">                <span class="string">&quot;/ip6/fe80::7adc:71f6:25a4:40e0/tcp/4001/p2p/bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg&quot;</span>,</span><br><span class="line">                <span class="string">&quot;/dns4/xxx.baasze.com/tcp/4001/p2p/bafzm3jqbec7ulhfmm7s7ydt2mf32nbsjy4237mvzj5skzbkxrfxz7axghsyum/p2p-circuit/p2p/bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg&quot;</span>,</span><br><span class="line">                <span class="string">&quot;/ip4/xx.xx.xx.xx/tcp/4001/p2p/bafzm3jqbec7ulhfmm7s7ydt2mf32nbsjy4237mvzj5skzbkxrfxz7axghsyum/p2p-circuit/p2p/bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg&quot;</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">&quot;AgentVersion&quot;</span>: <span class="string">&quot;go-ipfs/0.3.4/183988a&quot;</span>,</span><br><span class="line">        <span class="string">&quot;ProtocolVersion&quot;</span>: <span class="string">&quot;ipfs/0.1.0&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ipfs id</code> 命令可显示ipfs节点信息，其中Addresses为服务地址即hostAddr, ipfs 会将hostAddr广播出去, 其余节点会利用hostAddr的地址进行连接, 因此通过hostAddr能否连接节点是 <strong>节点互联的关键</strong>.</p>
+<h2 id="hostAddr的初始化"><a href="#hostAddr的初始化" class="headerlink" title="hostAddr的初始化"></a>hostAddr的初始化</h2><p>ipfs 启动后默认监听 “/ip4/0.0.0.0/tcp/0” “/ip6/::/tcp/0”, 此时 ipfs 查询本机各网卡地址并进行监听, 复杂网络环境下有如下几种情况:</p>
+<ul>
+<li><p>云主机通常采用经典网络模式分配的ECS固定公网IP, 在本机网卡上可见公网ip, 因此hostAddr的可查询到此公网ip</p>
+</li>
+<li><p>云主机通常采用弹性公网ip <strong>EIP（Elastic IP Address</strong>）访问, 在主机上网卡上不可见公网ip,因此hostAddr的 <strong>无法查询到此公网ip</strong></p>
+</li>
+</ul>
+<h2 id="hostAddr的更新"><a href="#hostAddr的更新" class="headerlink" title="hostAddr的更新"></a>hostAddr的更新</h2><p>对于部署在无外网网卡ip主机的ipfs, 若依靠广播初始化后的hostAddr, 无法被其余节点主动连接, 即 Inbound 无法走通, 因此 libp2p 设计了autonat、autorelay等机制</p>
+<p>注: <strong>fix host can be dialed by autonat public addr, but lost the public addr to announce</strong> <strong>此pr修复了hostAddr更新缺失EIP的情况,已被合并</strong>.</p>
+<h1 id="autonat机制"><a href="#autonat机制" class="headerlink" title="autonat机制"></a>autonat机制</h1><h2 id="autonat基本原理"><a href="#autonat基本原理" class="headerlink" title="autonat基本原理"></a>autonat基本原理</h2><p><strong>go-libp2p-autonat</strong> 运用remotePeer（对端节点）<strong>DialBack(回拨)机制</strong> 来获取自身服务的外网IP及端口, 其过程如下:</p>
+<ol>
+<li><p>全网中开启autonat service的某节点A, 该节点在p2p网络中支持 <strong>autonat协议（”/libp2p/autonat/1.0.0”）</strong></p>
+</li>
+<li><p>节点B主动连接上支持 autonat service的节点, 此连接为后续协议交互的连接, 包括 <strong>identify协议</strong> 和 <strong>autonat协议</strong></p>
+</li>
+<li><p>节点B在与A完成身份认证后判断节点A是否支持autonat协议, 若支持则由节点B的 autonat client 发起公网地址拨号请求(DialBack)</p>
+</li>
+<li><p>节点A的autonat service 收到DialBack请求后对节点B进行DialBack <strong>(回拨的地址为节点B的hostAddr以及已有连接的节点B地址)</strong>, 并将结果observations（包含Multiaddr及Reachability）发送给节点B</p>
+</li>
+<li><p>节点B根据DialBack的结果判断自身是 ReachabilityPublic 还是 ReachabilityPrivate, 并补充更新 hostAddr</p>
+</li>
+</ol>
+<h2 id="autonat优化"><a href="#autonat优化" class="headerlink" title="autonat优化"></a>autonat优化</h2><p>除了上述基本功能外, autonat还做了一些额外的优化</p>
+<ol>
+<li><p>节点B启动动态定时器主动对Peerstore的节点进行autonat协议探测以便获取自身最新的nat状态</p>
+</li>
+<li><p>对于网络状态的翻转（flipping)设定一个confidence, confidence的增加代表对当前状态的自信心（[0,3]）, 根据是否翻转以及confidence的值决定是否触发网络状态的改变, 修改hostAddr</p>
+</li>
+<li><p>confidence小于最大值时, 1.的探测定时器为固定时长(15 min), 否则对探测定时器做如下调整</p>
+</li>
+<li><p>当为外网可访问状态时，若最新的外网节点主动连接（Inbound Conn)成功且比最新的探测时间晚, 则延长1.的探测定时器时长, 段时间虚无继续探测</p>
+</li>
+</ol>
+<p>5.当为外网不可访问状态时，若最新的外网节点主动连接（Inbound Conn)成功且比最新的探测时间晚, 减小1.的探测定时器时长以变获取最新的外网地址</p>
+<p>总结: 目前ipfs中默认开启了autonat service及autonat探测</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/09/02/ipfs-3-autonat/" data-id="ckmmvgaew0005d12v6q2x38co" data-title="ipfs-3-autonat" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/autonat/" rel="tag">autonat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go-libp2p-autonat/" rel="tag">go-libp2p-autonat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hostAddr/" rel="tag">hostAddr</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ipfs/" rel="tag">ipfs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-ipfs-2-cluster" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/05/13/ipfs-2-cluster/" class="article-date">
+  <time class="dt-published" datetime="2020-05-13T02:56:18.000Z" itemprop="datePublished">2020-05-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/05/13/ipfs-2-cluster/">ipfs cluster</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="ipfs-cluster-私有网络集群搭建"><a href="#ipfs-cluster-私有网络集群搭建" class="headerlink" title="ipfs-cluster 私有网络集群搭建"></a>ipfs-cluster 私有网络集群搭建</h1><p>192.168.100.4 192.168.100.5 192.168.100.241 组成私有网络, 选取 192.168.100.241 为管理节点采用<br> <strong>ipfs-cluster-ctl</strong> 管理文件</p>
+<ul>
+<li>管理节点部署 ipfs-cluster-service</li>
+</ul>
+<p>记录如下 secret 和 cluster的管理节点信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">mkdir ipfs-cluster</span><br><span class="line"><span class="built_in">cd</span> ipfs-cluster</span><br><span class="line">wget https://dist.ipfs.io/ipfs-cluster-service/v0.12.1/ipfs-cluster-service_v0.12.1_linux-amd64.tar.gz</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">tar -xvzf ipfs-cluster-service_v0.12.1_linux-amd64.tar.gz</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">./ipfs-cluster-service/ipfs-cluster-service init</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">./ipfs-cluster-service/ipfs-cluster-service daemon &amp;</span><br><span class="line">[2] 88693</span><br><span class="line">16:41:34.958  INFO    service: Initializing. For verbose output run with <span class="string">&quot;-l debug&quot;</span>. Please <span class="built_in">wait</span>... daemon.go:46</span><br><span class="line">➜  ipfs-cluster 16:41:35.449  INFO    cluster: IPFS Cluster v0.12.1 listening on:</span><br><span class="line">        /ip4/127.0.0.1/tcp/9096/p2p/12D3KooWEdwm9Q7MXvZrYeMujrQ5fCzJwfJQX75gtSdTyYMpRozf</span><br><span class="line">        /ip4/192.168.100.241/tcp/9096/p2p/12D3KooWEdwm9Q7MXvZrYeMujrQ5fCzJwfJQX75gtSdTyYMpRozf</span><br><span class="line">        /ip4/127.0.0.1/udp/9096/quic/p2p/12D3KooWEdwm9Q7MXvZrYeMujrQ5fCzJwfJQX75gtSdTyYMpRozf</span><br><span class="line">        /ip4/192.168.100.241/udp/9096/quic/p2p/12D3KooWEdwm9Q7MXvZrYeMujrQ5fCzJwfJQX75gtSdTyYMpRozf</span><br><span class="line"></span><br><span class="line">cat ~/.ipfs-cluster/service.json|grep secret</span><br><span class="line">    <span class="string">&quot;secret&quot;</span>: <span class="string">&quot;8e3d96c01821b7f238e805fb28d6b873d09f279d1ff9e63aa3528848f79b73c3&quot;</span>,</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>节点部署 ipfs-cluster-service</li>
+</ul>
+<p><code>ipfs-cluster-service daemon --bootstrap</code> 指定管理节点</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ipfs-cluster</span><br><span class="line">wget https://dist.ipfs.io/ipfs-cluster-service/v0.12.1/ipfs-cluster-service_v0.12.1_linux-amd64.tar.gz</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">tar -xvzf ipfs-cluster-service_v0.12.1_linux-amd64.tar.gz</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">./ipfs-cluster-service/ipfs-cluster-service init</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">sed -i <span class="string">&#x27;s/&quot;secret&quot;.*/&quot;secret&quot;: &quot;8e3d96c01821b7f238e805fb28d6b873d09f279d1ff9e63aa3528848f79b73c3&quot;,/&#x27;</span> ~/.ipfs-cluster/service.json</span><br><span class="line"></span><br><span class="line">./ipfs-cluster-service/ipfs-cluster-service daemon  --bootstrap /ip4/192.168.100.241/tcp/9096/p2p/12D3KooWEdwm9Q7MXvZrYeMujrQ5fCzJwfJQX75gtSdTyYMpRozf &amp;</span><br><span class="line">...</span><br><span class="line">09:04:53.291  INFO    cluster: ** IPFS Cluster is READY ** cluster.go:655</span><br><span class="line">09:04:53.681  INFO    cluster: 12D3KooW9qFBb2K7TPRW7s654LJJM19hseGZBcvde6Hpe3sNVkWu: joined 12D3KooWEdwm9Q7MXvZrYeMujrQ5fCzJwfJQX75gtSdTyYMpRozf<span class="string">&#x27;s cluster cluster.go:993</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>管理节点部署 ipfs-cluster-service</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ipfs-cluster</span><br><span class="line"></span><br><span class="line">wget https://dist.ipfs.io/ipfs-cluster-service/v0.12.1/ipfs-cluster-ctl_v0.12.1_linux-amd64.tar.gz</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">tar -xvzf ipfs-cluster-ctl_v0.12.1_linux-amd64.tar.gz</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">cp ipfs-cluster-ctl/ipfs-cluster-ctl /usr/<span class="built_in">local</span>/bin</span><br><span class="line">ipfs-cluster-ctl peers ls</span><br><span class="line">17:14:13.571  INFO restapilog: 127.0.0.1 - - [13/May/2020:17:14:13 +0800] <span class="string">&quot;GET /peers HTTP/1.1&quot;</span> 200 6641</span><br><span class="line"> restapi.go:117</span><br><span class="line">12D3KooW9qFBb2K7TPRW7s654LJJM19hseGZBcvde6Hpe3sNVkWu | xxxxxx | Sees 2 other peers</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h1 id="ipfs-cluster-pin-测试"><a href="#ipfs-cluster-pin-测试" class="headerlink" title="ipfs-cluster pin 测试"></a>ipfs-cluster pin 测试</h1><ul>
+<li>管理节点添加文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> a &gt; a.txt</span><br><span class="line">ipfs-cluster-ctl a.txt</span><br><span class="line">added Qmbvkmk9LFsGneteXk3G7YLqtLVME566ho6ibaQZZVHaC9 a.txt</span><br><span class="line">17:24:10.699  INFO    cluster: pinning Qmbvkmk9LFsGneteXk3G7YLqtLVME566ho6ibaQZZVHaC9 on [12D3KooW9qFBb2K7TPRW7s654LJJM19hseGZBcvde6Hpe3sNVkWu 12D3KooWEdwm9Q7MXvZrYeMujrQ5fCzJwfJQX75gtSdTyYMpRozf 12D3KooWSKPbWzmnhjRrpi4EVz6NTCnYE6rfZLc1gzLQFdd4sHb6]: cluster.go:1400</span><br><span class="line">17:24:10.700  INFO       crdt: new pin added: Qmbvkmk9LFsGneteXk3G7YLqtLVME566ho6ibaQZZVHaC9 consensus.go:209</span><br><span class="line">17:24:10.700  INFO       crdt: adding new DAG head: QmZUnZo3dva57M29Ky2fTPqbEDaWnJWKnUMYMoYkxYpLFU (height: 1) heads.go:114</span><br><span class="line">17:24:10.701  INFO      adder: Qmbvkmk9LFsGneteXk3G7YLqtLVME566ho6ibaQZZVHaC9 successfully added to cluster adder.go:182</span><br><span class="line">17:24:10.701  INFO restapilog: 127.0.0.1 - - [13/May/2020:17:24:10 +0800] <span class="string">&quot;POST /add?chunker=size-262144&amp;cid-version=0&amp;hash=sha2-256&amp;hidden=false&amp;layout=&amp;local=false&amp;name=&amp;nocopy=false&amp;progress=false&amp;raw-leaves=false&amp;recursive=false&amp;replication-max=0&amp;replication-min=0&amp;shard=false&amp;shard-size=104857600&amp;stream-channels=true&amp;user-allocations=&amp;wrap-with-directory=false HTTP/1.1&quot;</span> 200 88</span><br><span class="line"> restapi.go:117</span><br><span class="line">➜  ipfs-cluster-ctl 17:24:10.803  INFO   ipfshttp: IPFS Pin request succeeded:  Qmbvkmk9LFsGneteXk3G7YLqtLVME566ho6ibaQZZVHaC9 ipfshttp.go:372</span><br><span class="line"></span><br><span class="line">ipfs pin ls |grep Qmbvkmk9LFsGneteXk3G7YLqtLVME566ho6ibaQZZVHaC9</span><br><span class="line">Qmbvkmk9LFsGneteXk3G7YLqtLVME566ho6ibaQZZVHaC9 recursive</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>节点测试副本</li>
+</ul>
+<p>192.168.100.4 及 192.168.100.5 均存在副本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ipfs pin ls |grep Qmbvkmk9LFsGneteXk3G7YLqtLVME566ho6ibaQZZVHaC9</span><br><span class="line">Qmbvkmk9LFsGneteXk3G7YLqtLVME566ho6ibaQZZVHaC9 recursive</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/05/13/ipfs-2-cluster/" data-id="ckmmvgaev0004d12v7zgi5c1i" data-title="ipfs cluster" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cluster/" rel="tag">cluster</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ipfs/" rel="tag">ipfs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-ipfs-1-file-distribution" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/05/08/ipfs-1-file-distribution/" class="article-date">
+  <time class="dt-published" datetime="2020-05-08T10:49:23.000Z" itemprop="datePublished">2020-05-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/05/08/ipfs-1-file-distribution/">ipfs 文件分发</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="/2020/05/08/ipfs-1-file-distribution/ipfs.png?170*130" alt="ipfs"><br>初识ipfs, 认为其能保证文件高可用.听某人聊起在A节点添加文件,过了许久后,A节点离线(退出 ipfs daemon), B节点已无法(添加后的第一次)访问A节点添加的文件, 即 文件并不会主动分发 .由此做一些测试并做如下总结.</p>
+<h1 id="ipfs文件add及访问测试"><a href="#ipfs文件add及访问测试" class="headerlink" title="ipfs文件add及访问测试"></a>ipfs文件add及访问测试</h1><h2 id="ipfs单节点的文件存储"><a href="#ipfs单节点的文件存储" class="headerlink" title="ipfs单节点的文件存储"></a>ipfs单节点的文件存储</h2><p>ipfs add xxx <strong>默认启用pin</strong>, 即将文件复制一份副本存储在本地</p>
+<ul>
+<li>添加文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;pin.no.daemon&#x27;</span> &gt; pin.no.daemon.txt</span><br><span class="line"></span><br><span class="line">ipfs add pin.no.daemon.txt</span><br><span class="line">added bafk43jqbedag3yc4ixfr73frvbvz5fs6afx4rogxiiaipmdcce7jgcrdlwa5o pin.no.daemon.txt</span><br><span class="line"> 14 B / 14 B [=======================================================================================================] 100.00%</span><br><span class="line"></span><br><span class="line">ipfs pin ls |grep bafk43jqbedag3yc4ixfr73frvbvz5fs6afx4rogxiiaipmdcce7jgcrdlwa5o</span><br><span class="line">bafk43jqbedag3yc4ixfr73frvbvz5fs6afx4rogxiiaipmdcce7jgcrdlwa5o recursive</span><br><span class="line"></span><br><span class="line">ipfs cat /ipfs/bafk43jqbedag3yc4ixfr73frvbvz5fs6afx4rogxiiaipmdcce7jgcrdlwa5o</span><br><span class="line">pin.no.daemon</span><br></pre></td></tr></table></figure>
+
+<p>添加文件后使用 ipfs pin ls 命令可查询文件到已 <strong>pin</strong> 到本地</p>
+<ul>
+<li>删除本地文件测试</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rm pin.no.daemon.txt</span><br><span class="line"></span><br><span class="line">ipfs pin ls |grep bafk43jqbedag3yc4ixfr73frvbvz5fs6afx4rogxiiaipmdcce7jgcrdlwa5o</span><br><span class="line">bafk43jqbedag3yc4ixfr73frvbvz5fs6afx4rogxiiaipmdcce7jgcrdlwa5o recursive</span><br><span class="line"></span><br><span class="line">ipfs cat /ipfs/bafk43jqbedag3yc4ixfr73frvbvz5fs6afx4rogxiiaipmdcce7jgcrdlwa5o</span><br><span class="line">pin.no.daemon</span><br></pre></td></tr></table></figure>
+
+<p>删除源文件及仍可访问, 推测原因是ipfs add 命令 <strong>pin</strong> 了副本</p>
+<ul>
+<li>删除pin文件测试</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ipfs pin rm bafk43jqbedag3yc4ixfr73frvbvz5fs6afx4rogxiiaipmdcce7jgcrdlwa5o</span><br><span class="line">unpinned bafk43jqbedag3yc4ixfr73frvbvz5fs6afx4rogxiiaipmdcce7jgcrdlwa5o</span><br><span class="line"></span><br><span class="line">ipfs pin ls |grep bafk43jqbedag3yc4ixfr73frvbvz5fs6afx4rogxiiaipmdcce7jgcrdlwa5o</span><br><span class="line"></span><br><span class="line">ipfs cat /ipfs/bafk43jqbedag3yc4ixfr73frvbvz5fs6afx4rogxiiaipmdcce7jgcrdlwa5o</span><br><span class="line">pin.no.daemon</span><br></pre></td></tr></table></figure>
+<p>“删除” pin文件发现仍可访问，推测’删除’并未立刻生效,联想到是否有类似 <strong>GC</strong> 机制</p>
+<ul>
+<li>GC后测试</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ipfs repo gc</span><br><span class="line">...</span><br><span class="line">removed bafk43jqbedag3yc4ixfr73frvbvz5fs6afx4rogxiiaipmdcce7jgcrdlwa5o</span><br><span class="line"></span><br><span class="line">ipfs cat /ipfs/bafk43jqbedag3yc4ixfr73frvbvz5fs6afx4rogxiiaipmdcce7jgcrdlwa5o</span><br><span class="line">Error: merkledag: not found</span><br></pre></td></tr></table></figure>
+<p>GC才会真正回收 <strong>unpined</strong> 文件</p>
+<ul>
+<li>GC 机制</li>
+</ul>
+<p>ipfs config show 查看 Datastore 配置</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;Datastore&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;StorageMax&quot;</span>: <span class="string">&quot;10GB&quot;</span>,           <span class="comment">// 最大存储空间, 实际上, 存储量超过该值仍可以继续存储</span></span><br><span class="line">      <span class="attr">&quot;StorageGCWatermark&quot;</span>: <span class="number">90</span>,       <span class="comment">// 存储空间警戒线, 只有 已使用存储空间/最大存储空间 超过该值, 定时自动 GC 才会生效, 否则不会 GC</span></span><br><span class="line">      <span class="attr">&quot;GCPeriod&quot;</span>: <span class="string">&quot;1h&quot;</span>,               <span class="comment">// 每过 1h, 检查是否需要 GC</span></span><br><span class="line">      </span><br><span class="line">      ...</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>默认定时GC不开启</strong>, 使用<code>ipfs daemon --enable-gc</code>开启, 使用<code>ipfs repo gc</code>手动触发 <strong>GC</strong></p>
+<h2 id="多节点情况下测试"><a href="#多节点情况下测试" class="headerlink" title="多节点情况下测试"></a>多节点情况下测试</h2><p>A、B 两节点组成的私有网络，都使用 ipfs daemon 启动</p>
+<ul>
+<li>A节点添加文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ipfs repo gc</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;pin.with.daemon&#x27;</span> &gt; pin.with.daemon.txt</span><br><span class="line"></span><br><span class="line">ipfs add pin.with.daemon.txt </span><br><span class="line">added bafk43jqbedzjup3mmlj5vuq65nqpkoob3ayjnnsmv4sq75zy7bmu4h3zws43i pin.with.daemon.txt</span><br><span class="line"> 16 B / 16 B [==========================================================================================] 100.00%</span><br><span class="line"> </span><br><span class="line">ipfs pin ls |grep bafk43jqbedzjup3mmlj5vuq65nqpkoob3ayjnnsmv4sq75zy7bmu4h3zws43i</span><br><span class="line">bafk43jqbedzjup3mmlj5vuq65nqpkoob3ayjnnsmv4sq75zy7bmu4h3zws43i recursive</span><br></pre></td></tr></table></figure>
+<p>文件pin.with.daemon.txt <strong>pin</strong> 在 A 节点</p>
+<ul>
+<li>B节点访问</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ipfs repo gc</span><br><span class="line"></span><br><span class="line">ipfs pin ls |grep bafk43jqbedzjup3mmlj5vuq65nqpkoob3ayjnnsmv4sq75zy7bmu4h3zws43i</span><br><span class="line"></span><br><span class="line">ipfs cat /ipfs/bafk43jqbedzjup3mmlj5vuq65nqpkoob3ayjnnsmv4sq75zy7bmu4h3zws43i</span><br><span class="line">pin.with.daemon</span><br><span class="line"></span><br><span class="line">ipfs pin ls |grep bafk43jqbedzjup3mmlj5vuq65nqpkoob3ayjnnsmv4sq75zy7bmu4h3zws43i</span><br><span class="line"></span><br><span class="line">ipfs get /ipfs/bafk43jqbedzjup3mmlj5vuq65nqpkoob3ayjnnsmv4sq75zy7bmu4h3zws43i</span><br><span class="line">Saving file(s) to bafk43jqbedzjup3mmlj5vuq65nqpkoob3ayjnnsmv4sq75zy7bmu4h3zws43i</span><br><span class="line"> 16 B / 16 B [=======================================================================================] 100.00% 0s</span><br><span class="line"></span><br><span class="line">ipfs pin ls |grep bafk43jqbedzjup3mmlj5vuq65nqpkoob3ayjnnsmv4sq75zy7bmu4h3zws43i</span><br></pre></td></tr></table></figure>
+<p>B 节点可访问,但并无 pin 副本</p>
+<ul>
+<li>A节点删除文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">rm pin.with.daemon.txt </span><br><span class="line"></span><br><span class="line">ipfs pin rm bafk43jqbedzjup3mmlj5vuq65nqpkoob3ayjnnsmv4sq75zy7bmu4h3zws43i</span><br><span class="line">unpinned bafk43jqbedzjup3mmlj5vuq65nqpkoob3ayjnnsmv4sq75zy7bmu4h3zws43i</span><br><span class="line"></span><br><span class="line">ipfs repo gc</span><br><span class="line">...</span><br><span class="line">removed bafk43jqbedzjup3mmlj5vuq65nqpkoob3ayjnnsmv4sq75zy7bmu4h3zws43i</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>B节点访问</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ipfs cat /ipfs/bafk43jqbedzjup3mmlj5vuq65nqpkoob3ayjnnsmv4sq75zy7bmu4h3zws43i</span><br><span class="line">pin.with.daemon</span><br><span class="line"></span><br><span class="line">ipfs pin ls |grep bafk43jqbedzjup3mmlj5vuq65nqpkoob3ayjnnsmv4sq75zy7bmu4h3zws43i</span><br></pre></td></tr></table></figure>
+<p>此时B节点仍旧可以访问,但无 pin 副本</p>
+<ul>
+<li>B节点GC后访问</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ipfs repo gc</span><br><span class="line">removed bafk43jqbedzjup3mmlj5vuq65nqpkoob3ayjnnsmv4sq75zy7bmu4h3zws43i</span><br><span class="line"></span><br><span class="line">ipfs pin ls |grep bafk43jqbedzjup3mmlj5vuq65nqpkoob3ayjnnsmv4sq75zy7bmu4h3zws43i</span><br><span class="line"></span><br><span class="line">ipfs cat /ipfs/bafk43jqbedzjup3mmlj5vuq65nqpkoob3ayjnnsmv4sq75zy7bmu4h3zws43i</span><br></pre></td></tr></table></figure>
+<p>B节点缓存失效, ipfs cat 因私有网络已无副本挂起</p>
+<h2 id="ipfs文件add及访问机制"><a href="#ipfs文件add及访问机制" class="headerlink" title="ipfs文件add及访问机制"></a>ipfs文件add及访问机制</h2><ul>
+<li><p>ipfs add并不会主动分发文件到其他节点</p>
+</li>
+<li><p>访问文件<strong>并不会pin到本地节点</strong></p>
+</li>
+<li><p>无论是访问操作还是 <strong>pin</strong> 操作均会在数据库中备份(大于分片的情况下可能不是全量)</p>
+</li>
+<li><p>触发GC会删除unpined数据</p>
+</li>
+</ul>
+<h2 id="ipfs如何保证可靠分布式存储"><a href="#ipfs如何保证可靠分布式存储" class="headerlink" title="ipfs如何保证可靠分布式存储"></a>ipfs如何保证可靠分布式存储</h2><p>参考 <a target="_blank" rel="noopener" href="https://github.com/ipfs-inactive/faq/issues/47">Replication on IPFS</a></p>
+<ul>
+<li><p>ipfs 协议用于保证节点之间的数据快速共享访问, 并不保证可靠存储</p>
+</li>
+<li><p>若要实现可靠存储，应基于 ipfs 之上构建实现可靠存储的新协议，如 <strong>ipfs-cluster</strong></p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/05/08/ipfs-1-file-distribution/" data-id="ckmmvgaeu0003d12v3cf23woi" data-title="ipfs 文件分发" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ipfs/" rel="tag">ipfs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pin/" rel="tag">pin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/repo-gc/" rel="tag">repo gc</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-traffic-interception" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/04/10/traffic-interception/" class="article-date">
+  <time class="dt-published" datetime="2020-04-10T09:46:46.000Z" itemprop="datePublished">2020-04-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/04/10/traffic-interception/">流量拦截</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="流量引导方案"><a href="#流量引导方案" class="headerlink" title="流量引导方案"></a>流量引导方案</h1><p>OTT设备中的app通常需要对视频、游戏加速, 广电等运营商网络中的IPTV终端需要进行内容管控及控制带宽成本, 各类终端(笔记本、路由器)等需要科学上网首先要解决的就是拦截本机流量并转发至远程代理. 下面以 <strong>linux</strong> 为例探讨本地流量引导技术方案</p>
+<h2 id="应用层拦截"><a href="#应用层拦截" class="headerlink" title="应用层拦截"></a>应用层拦截</h2><p>http 代理协议, 如 linux 系统设置全局http代理, 需要客户端系统主动设置, 可实现http流量全量引导, 应用层加速受协议限制较大</p>
+<h2 id="传输层拦截"><a href="#传输层拦截" class="headerlink" title="传输层拦截"></a>传输层拦截</h2><h3 id="引导方案"><a href="#引导方案" class="headerlink" title="引导方案"></a>引导方案</h3><ul>
+<li>通过添加 <code>iptables -t nat ... -j DNAT/REDIRECT ...</code> 规则实现流量转发至本地代理(远程代理),本地代理可对流量做二次过滤将流量转发到远程代理服务器或源站</li>
+</ul>
+<ol>
+<li><p><strong>DNAT</strong> 流量转发至远程代理, 通常用于特定端口转发, 远程代理无法知道原始目的地址, 按既定的加速服务处理请求</p>
+</li>
+<li><p><strong>REDIRECT/DNAT</strong> 流量转发至本地, 本地代理可以获取原始目的地址, 选择直接发送数据包至原站或发送数据包及原始目的地址到远程代理服务器加速</p>
+</li>
+<li><p><strong>tproxy</strong> 配合策略路由将流量引导至本地代理, 针对 <strong>udp</strong>, 具体做法是在 mangle 表的 <strong>PREROUTING</strong> 链中为每个 udp 数据包打上 0x2333/0x2333 标签并设定需获取报文信息的本地代理地址 <strong>127.0.0.1:1080</strong>, 策略路由设置将具有 <strong>0x2333/0x2333</strong> 标志的数据包投递到本地环回设备上的 <strong>1080</strong> 端口</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -t mangle -A PREROUTING -p udp -j tproxy --tproxy-mark 0x2333/0x2333 --on-ip 127.0.0.1 --on-port 1080</span><br><span class="line">ip rule add fwmark 0x2333/0x2333 pref 100 table 100</span><br><span class="line">ip route add <span class="built_in">local</span> default dev lo table 100</span><br></pre></td></tr></table></figure>
+<p>对监听 1080 端口的本地代理 socket 需设置 IP_TRANSPARENT 标志</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span></span><br><span class="line">create_server_socket(<span class="keyword">const</span> <span class="keyword">char</span> *host, <span class="keyword">const</span> <span class="keyword">char</span> *port)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> MODULE_REDIR</span></span><br><span class="line">        <span class="keyword">if</span> (setsockopt(server_sock, SOL_IP, IP_TRANSPARENT, &amp;opt, <span class="keyword">sizeof</span>(opt))) &#123;</span><br><span class="line">            ERROR(<span class="string">&quot;[udp] setsockopt IP_TRANSPARENT&quot;</span>);</span><br><span class="line">            <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (rp-&gt;ai_family == AF_INET) &#123;</span><br><span class="line">            <span class="keyword">if</span> (setsockopt(server_sock, SOL_IP, IP_RECVORIGDSTADDR, &amp;opt, <span class="keyword">sizeof</span>(opt))) &#123;</span><br><span class="line">                FATAL(<span class="string">&quot;[udp] setsockopt IP_RECVORIGDSTADDR&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (rp-&gt;ai_family == AF_INET6) &#123;</span><br><span class="line">            <span class="keyword">if</span> (setsockopt(server_sock, SOL_IPV6, IPV6_RECVORIGDSTADDR, &amp;opt, <span class="keyword">sizeof</span>(opt))) &#123;</span><br><span class="line">                FATAL(<span class="string">&quot;[udp] setsockopt IPV6_RECVORIGDSTADDR&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="本地代理原始目的地址获取"><a href="#本地代理原始目的地址获取" class="headerlink" title="本地代理原始目的地址获取"></a>本地代理原始目的地址获取</h3><ul>
+<li>tcp协议</li>
+</ul>
+<p>本地代理收到经 <code>iptables -t nat ... -j DNAT/REDIRECT ...</code> 转发后的tcp请求可采用 <strong>getsockopt(fd, SOL_IP, SO_ORIGINAL_DST, destaddr, &amp;socklen)</strong> 获取原始目的地址 <strong>destaddr</strong></p>
+<ul>
+<li>udp协议</li>
+</ul>
+<p>事实上在 linux 中对于上述 <strong>SO_ORIGINAL_DST</strong> 调用最终会调用 <strong>getorigdst</strong>, 因此 udp 协议无法使用 <strong>SO_ORIGINAL_DST</strong> 获取原始目的地址</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* We only do TCP and SCTP at the moment: is there a better way? */</span></span><br><span class="line"><span class="keyword">if</span> (tuple.dst.protonum != IPPROTO_TCP &amp;&amp;</span><br><span class="line">    tuple.dst.protonum != IPPROTO_SCTP) &#123;</span><br><span class="line">  pr_debug(<span class="string">&quot;SO_ORIGINAL_DST: Not a TCP/SCTP socket\n&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> -ENOPROTOOPT;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>tproxy 方案 udp 原始目的地址获取</li>
+</ol>
+<p>对监听 <strong>1080</strong> 端口的本地代理 <strong>socket</strong> 设置 <strong>IP_TRANSPARENT</strong> 标志后, 需调用 <strong>recvmsg</strong> 函数接收数据包,采用循环比对 <strong>IP_RECVORIGDSTADDR/IPV6_RECVORIGDSTADDR</strong> 获取原始目的地址</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span></span><br><span class="line">get_dstaddr(struct msghdr *msg, struct sockaddr_storage *dstaddr)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">cmsghdr</span> *<span class="title">cmsg</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (cmsg = CMSG_FIRSTHDR(msg); cmsg; cmsg = CMSG_NXTHDR(msg, cmsg)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (cmsg-&gt;cmsg_level == SOL_IP &amp;&amp; cmsg-&gt;cmsg_type == IP_RECVORIGDSTADDR) &#123;</span><br><span class="line">            <span class="built_in">memcpy</span>(dstaddr, CMSG_DATA(cmsg), <span class="keyword">sizeof</span>(struct sockaddr_in));</span><br><span class="line">            dstaddr-&gt;ss_family = AF_INET;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (cmsg-&gt;cmsg_level == SOL_IPV6 &amp;&amp; cmsg-&gt;cmsg_type == IPV6_RECVORIGDSTADDR) &#123;</span><br><span class="line">            <span class="built_in">memcpy</span>(dstaddr, CMSG_DATA(cmsg), <span class="keyword">sizeof</span>(struct sockaddr_in6));</span><br><span class="line">            dstaddr-&gt;ss_family = AF_INET6;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>REDIRECT/DNAT 方案 udp 原始目的地址获取</li>
+</ol>
+<p>上述 1. 中 <strong>tproxy</strong> 模块需要编译内核开启支持, 实际上 linux 内核采用 <strong>nf_conntrack</strong> 跟踪网络连接信息(包括udp), 此表可以通过**/proc/net/nf_conntrack** 查看, 里面包含tcp、udp的连接跟踪信息<br>本地代理接收到 <strong>REDIRECT/DNAT</strong> 的udp 数据包后, 可依据本地代理地址, 客户端地址, nat端口信息查询 <strong>nf_conntrack</strong> 表获取原始目的地址, 可参考 <a target="_blank" rel="noopener" href="http://www2.soopat.com/Patent/201610261388">一种UDP协议加速方法和系统</a></p>
+<h2 id="IP层拦截"><a href="#IP层拦截" class="headerlink" title="IP层拦截"></a>IP层拦截</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/04/10/traffic-interception/" data-id="ckmmvgafa001id12vhqpadpqh" data-title="流量拦截" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dnat/" rel="tag">dnat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nf-conntrack/" rel="tag">nf_conntrack</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/proxy/" rel="tag">proxy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tproxy/" rel="tag">tproxy</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-router-meilin-rt-ac68u" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/04/01/router-meilin-rt-ac68u/" class="article-date">
+  <time class="dt-published" datetime="2020-04-01T10:02:30.000Z" itemprop="datePublished">2020-04-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/04/01/router-meilin-rt-ac68u/">路由器 梅林 RT-AC68U</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="梅林固件"><a href="#梅林固件" class="headerlink" title="梅林固件"></a>梅林固件</h1><ul>
+<li><p>RT-AC68U/RT-1750B1 默认出厂采用路由器设置界面直接上传梅林固件(第三方固件)刷机无法通过验证,可采用降级后再刷</p>
+</li>
+<li><p>固件升级在路由器管理界面中的<img src="/2020/04/01/router-meilin-rt-ac68u/firmware.jpg" alt="系统管理 - 固件升级"></p>
+</li>
+</ul>
+<ol>
+<li>降级至 3.0.0.4.384.10007</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1Caz3GdeMhdcsbBUcuCrYcQ">3.0.0.4.384.10007</a>, 提取码 2dft</p>
+<ol start="2">
+<li>升级至 380.70-0-X7.9</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://firmware.koolshare.cn/Koolshare_Merlin_Legacy_380/ASUS/RT-AC68U/X7.9/RT-AC68U_380.70_0-X7.9-koolshare.trx">380.70-0-X7.9</a></p>
+<h1 id="公网ip及ddns"><a href="#公网ip及ddns" class="headerlink" title="公网ip及ddns"></a>公网ip及ddns</h1><ul>
+<li>公网ip</li>
+</ul>
+<p>坐标福建厦门,电信宽带拨号,拨打10000号申请公网ip,按客服提示半小时后重启光猫及路由器即可,其中光猫客服可远程重启</p>
+<ul>
+<li>ddns</li>
+</ul>
+<p>RT-AC68U自带华硕的ddns,可开启梅林 <strong>外部网络(WAN) - DDNS</strong> 中的 <strong>DDNS Client</strong>, 将自定义的 主机名称 与路由器 WAN ip绑定<img src="/2020/04/01/router-meilin-rt-ac68u/ddns.jpg" alt="ddns setting"><br>设置完成后梅林中的 网络地图显示如下<img src="/2020/04/01/router-meilin-rt-ac68u/netmap.jpg" alt="netmap"><br>外网可通过 ping 自定义前缀.asuscomm.com ( 需开启梅林中的 <strong>防火墙 - 一般设置 中的 响应ICMP Echo(ping)要求</strong> )</p>
+<ul>
+<li>ssh</li>
+</ul>
+<p>具有公网ip后,设置梅林的 <strong>系统管理 - 系统设置</strong> 中的 SSH Daemon, 即可采用公网登陆梅林<img src="/2020/04/01/router-meilin-rt-ac68u/ssh.jpg" alt="ssh setting"></p>
+<h1 id="NAS"><a href="#NAS" class="headerlink" title="NAS"></a>NAS</h1><p>由于受够了一些某网的上传慢、限速等诟病,且云盘安全性及迁移也较为麻烦.考虑到更新了电信宽带具备公网ip,因此依托梅林搭建具备 <strong>公网访问能力的NAS服务</strong> 供家庭使用,用于手机等客户端随时随地能下载备份照片、文件及电影等,即安全又方便.NAS服务 <strong>以smb协议为例实现局域网及公网NAS服务</strong></p>
+<h2 id="局域网-NAS"><a href="#局域网-NAS" class="headerlink" title="局域网 NAS"></a>局域网 NAS</h2><ul>
+<li><p>插入外置U盘或移动硬盘</p>
+</li>
+<li><p>设置smb</p>
+</li>
+</ul>
+<p>开启梅林中的 <strong>USB 相关应用程序 - 网络共享（Samba） / 云端硬盘</strong>, 其中默认账户为路由器账户,按硬盘存储的文件夹共享,可设置账号、共享文件夹、权限<img src="/2020/04/01/router-meilin-rt-ac68u/smb.jpg" alt="smb setting"><br>iphone 手机连接路由wifi并设置smb(路由器ip,smb默认端口445)即可,例如 <strong>ES文件游览器 FileExplore</strong></p>
+<h2 id="公网-NAS"><a href="#公网-NAS" class="headerlink" title="公网 NAS"></a>公网 NAS</h2><ul>
+<li><p>由于安全问题,运营商 <strong>封了smb服务</strong> 的tcp端口 <strong>445、139</strong> 及udp端口 <strong>137、138</strong>, 同时封闭了 <strong>80、8080</strong> 等需要备案的端口</p>
+</li>
+<li><p>smb服务优先运行于445端口,因此可做端口转发实现外网访问smb服务,由于 <strong>路由器管理界面无法添加445端口的端口转发</strong>, 因此必须 ssh 登陆路由器设置端口转发</p>
+</li>
+</ul>
+<ol>
+<li><p>内网 NAS 设置完成后 ps |grep smbd 可以观察到 smbd 进程, netstat -ntlp|grep 445 发现其监听在 br0 及 lo 网卡上</p>
+</li>
+<li><p>添加转发规则,其中 192.168.50.1 应改为 smbd 监听网卡ip, <strong>本例防火墙是关闭的,若开启需要考虑防火墙对端口转发的限制,自定义防火墙设置可采用 jssf 中添加脚本守护</strong></p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -I VSERVER -p tcp -m tcp --dport 30445 -j DNAT --to-destination 192.168.50.1:445</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>实测发现,端口转发不起作用,原因是 <strong>梅林</strong> 源码 <a target="_blank" rel="noopener" href="https://github.com/RMerl/asuswrt-merlin/blob/263449f32bf292fb6bc5a08cd645e61a7fb10485/release/src-rt/linux/linux-2.6/net/ipv4/netfilter/lfp.c#L99">lfpctrl</a> 对 445 做了端口转发限制, 关闭限制</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> 0 &gt; /proc/net/lfpctrl</span><br></pre></td></tr></table></figure>
+
+<p>由于 2. 和 3. 的操作无法固化,路由器重启后将失效,可在 <strong>jssf 中增加启动脚本新建 cron 定时任务 check</strong>. 其中 <a target="_blank" rel="noopener" href="https://github.com/RMerl/asuswrt-merlin.ng/wiki/JFFS">jffs</a> 为路由器的非易失存储,重启后数据仍保持,但是刷固件后会丢失,需要在梅林中配置开启(某些版本固件已经开启请忽略). <a target="_blank" rel="noopener" href="https://github.com/RMerl/asuswrt-merlin.ng/wiki/User-scripts#init-start">init-start</a> 为 jffs mount后其他服务启动前的调用脚本<img src="/2020/04/01/router-meilin-rt-ac68u/jssf.jpg" alt="jssf setting"><br>ssh登入路由器执行如下脚本,两分钟后 iptables -t nat -nL|grep 30445 查看是否有转发规则</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /jffs/scripts</span><br><span class="line"></span><br><span class="line">cat &lt;&lt; <span class="string">EOF &gt; custom-smb</span></span><br><span class="line"><span class="string">#!/bin/sh</span></span><br><span class="line"><span class="string">touch /tmp/000custom_smb</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">success_30445=`iptables -t nat -nL|grep 30445`</span></span><br><span class="line"><span class="string">if [ &quot;$success_30445&quot; == &quot;&quot; ]; then</span></span><br><span class="line"><span class="string">    iptables -t nat -I VSERVER -p tcp -m tcp --dport 30445 -j DNAT --to-destination 192.168.50.1:445</span></span><br><span class="line"><span class="string">    echo &quot;fix success_30445!\n&quot; &gt;&gt; /tmp/000custom_smb</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">success_lfpctrl=`cat /proc/net/lfpctrl`</span></span><br><span class="line"><span class="string">if [ &quot;$success_lfpctrl&quot; != &quot;0,(null),0&quot; ]; then</span></span><br><span class="line"><span class="string">        echo 0 &gt; /proc/net/lfpctrl</span></span><br><span class="line"><span class="string">        echo &quot;fix success_lfpctrl!\n&quot; &gt;&gt; /tmp/000custom_smb</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line">cat &lt;&lt; <span class="string">EOF &gt; init-start</span></span><br><span class="line"><span class="string">#!/bin/sh</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">cru a custom-smb &quot;*/2 * * * * /jffs/scripts/custom-smb&quot;</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line">chmod 755 init-start</span><br><span class="line">chmod 755 custom-smb</span><br><span class="line">./init-start</span><br></pre></td></tr></table></figure>
+
+<h1 id="NAS-客户端"><a href="#NAS-客户端" class="headerlink" title="NAS 客户端"></a>NAS 客户端</h1><ul>
+<li><p>由于smb服务端口设置了转发,客户端需要能 <strong>指定非445的服务端端口</strong> ,ios系统有 <strong>FileExplorer</strong> 支持多种格式,对于处理文档图片等很实用</p>
+</li>
+<li><p>关于smb中的视频, <strong>FileExplorer</strong> 支持的视频格式不多,但支持调用外部播放器. 其他的支持自定义端口smb服务端的NAS视频播放器有 <strong>nPlayer</strong> 也是非常值得推荐的</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/04/01/router-meilin-rt-ac68u/" data-id="ckmmvgaez000ad12vblb2bib3" data-title="路由器 梅林 RT-AC68U" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NAS/" rel="tag">NAS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RT-AC68U/" rel="tag">RT-AC68U</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/meilin/" rel="tag">meilin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/smb/" rel="tag">smb</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-nodejs-array-join" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/03/25/nodejs-array-join/" class="article-date">
+  <time class="dt-published" datetime="2020-03-25T09:15:07.000Z" itemprop="datePublished">2020-03-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/03/25/nodejs-array-join/">nodejs array join</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Array-和-Uint8Array-初始化"><a href="#Array-和-Uint8Array-初始化" class="headerlink" title="Array 和 Uint8Array 初始化"></a>Array 和 Uint8Array 初始化</h1><p>new Array(3) 初始化为 3个 undefine 元素的 []<br>new Uint8Array(3) 初始化为 3个 ‘0’ 元素的 []</p>
+<h2 id="Array-join"><a href="#Array-join" class="headerlink" title="Array join"></a>Array join</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>).join(<span class="string">&#x27;0&#x27;</span>)) <span class="comment">// 输出: &quot;00&quot;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Uint8Array</span>(<span class="number">3</span>).join(<span class="string">&#x27;0&#x27;</span>)) <span class="comment">// 输出: &quot;00000&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="leftPad-的两种实现，运用-Uint8Array-和-Array-的区别"><a href="#leftPad-的两种实现，运用-Uint8Array-和-Array-的区别" class="headerlink" title="leftPad 的两种实现，运用 Uint8Array 和 Array 的区别"></a>leftPad 的两种实现，运用 Uint8Array 和 Array 的区别</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">leftPadByUint8Array</span>(<span class="params">input, num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (input.length &gt;= num) <span class="keyword">return</span> input</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (<span class="keyword">new</span> <span class="built_in">Uint8Array</span>(num - input.length)).join(<span class="string">&#x27;&#x27;</span>) + input</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">leftPadByArray</span>(<span class="params">input, num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (input.length &gt;= num) <span class="keyword">return</span> input</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (<span class="keyword">new</span> <span class="built_in">Array</span>(num - input.length + <span class="number">1</span>)).join(<span class="string">&#x27;0&#x27;</span>) + input</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(leftPadByUint8Array(<span class="string">&#x27;00567&#x27;</span>, <span class="number">8</span>) == leftPadByArray(<span class="string">&#x27;0567&#x27;</span>, <span class="number">8</span>))</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/03/25/nodejs-array-join/" data-id="ckmmvgaex0007d12vf8w1b11g" data-title="nodejs array join" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Array/" rel="tag">Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Uint8Array/" rel="tag">Uint8Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs-join/" rel="tag">nodejs join</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-elliptic-curve" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/03/18/elliptic-curve/" class="article-date">
+  <time class="dt-published" datetime="2020-03-18T09:23:45.000Z" itemprop="datePublished">2020-03-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/03/18/elliptic-curve/">椭圆曲线加密</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="椭圆曲线应用原理"><a href="#椭圆曲线应用原理" class="headerlink" title="椭圆曲线应用原理"></a>椭圆曲线应用原理</h1><h2 id="离散对数问题"><a href="#离散对数问题" class="headerlink" title="离散对数问题"></a>离散对数问题</h2><p>ECC算法是在有限域Fp定义公式:Q=kP,已知大数k和点P的情况下,很容易求点Q,但是已知的点P、点Q,却很难求得k,这就是经典的离散对数问题,ECC算法正是利用该特点进行加密,点Q为公钥,大数k为私钥,点P为基点</p>
+<h2 id="数字签名算法"><a href="#数字签名算法" class="headerlink" title="数字签名算法"></a>数字签名算法</h2><p>1、选择一条椭圆曲线Ep(a,b),和基点G<br>2、选择私有密钥da（da &lt; n, n为G的阶),利用基点G计算公开密钥 Qa = da * G<br>3、产生一个随机整数k (k &lt; n),计算点(x, y) = k * G,取x坐标为R<br>4、对原数据做hash为z<br>5、利用方程 S = k^-1 * (z + da * R) mod p 计算S<br>6、R和S做为签名值, 如果R和S其中一个为0, 重新从第3步开始执行</p>
+<h2 id="数字签名验证"><a href="#数字签名验证" class="headerlink" title="数字签名验证"></a>数字签名验证</h2><p>1、接受方在收到消息(m)和签名值(R,S)后,进行以下运算<br>2、对原数据做hash为z<br>3、计算 P = S^-1 * z * G + S^-1 * R * Qa<br>4、如果P的 x = R, 则签名有效</p>
+<h2 id="椭圆曲线非对称加解密"><a href="#椭圆曲线非对称加解密" class="headerlink" title="椭圆曲线非对称加解密"></a>椭圆曲线非对称加解密</h2><p>1、椭圆曲线上的两对公私钥 Qa = da * G, Qb = db * G<br>2、设用户密钥为 [da, Qa]<br>3、临时生成密钥为 [db, Qb]<br>4、运用用户公钥及临时私钥计算加密密钥: Key = Qa * db,运用Key对原文做加密,返回密文及临时公钥Qb,返回信息中可选包含Key及原文的hash<br>5、解密时提取临时公钥Qb,使用用户私钥计算加密密钥: Key = da * Qb,运用Key对密文做解密,可选对hash信息做验证<br>6、运用Key对原文做加解密本质是对称加密,只要能通过Key进行加解密即可,由于Key的长度有限,需要考虑Key的加解密算法安全性</p>
+<h1 id="椭圆曲线"><a href="#椭圆曲线" class="headerlink" title="椭圆曲线"></a>椭圆曲线</h1><h2 id="曲线方程"><a href="#曲线方程" class="headerlink" title="曲线方程"></a>曲线方程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y^2 = x^3 + ax + b</span><br><span class="line">4a^3 + 27b^2 ≠ 0</span><br></pre></td></tr></table></figure>
+<p>其中：4a^3 + 27b^2 ≠ 0 这个限定条件是为了保证曲线不包含奇点（在数学中是指曲线上任意一点都存在切线）</p>
+<h2 id="加法"><a href="#加法" class="headerlink" title="加法"></a>加法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C = A + B</span><br></pre></td></tr></table></figure>
+<p>椭圆曲线上的两点A、B直线与椭圆曲线的交点,该交点关于x轴对称位置的点,定义为 A + B</p>
+<h2 id="数乘"><a href="#数乘" class="headerlink" title="数乘"></a>数乘</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C = 2A = A + A</span><br></pre></td></tr></table></figure>
+<p>椭圆曲线在A点的切线与椭圆曲线的交点,该焦点关于x轴对称位置的点,定义为 2A</p>
+<h2 id="正负取反"><a href="#正负取反" class="headerlink" title="正负取反"></a>正负取反</h2><p>椭圆曲线上的点A关于x轴对称位置的点定义为-A</p>
+<h2 id="无穷远点"><a href="#无穷远点" class="headerlink" title="无穷远点"></a>无穷远点</h2><p>将A与-A相加,过A与-A的直线平行于y轴,可以认为直线与椭圆曲线相交于无穷远点</p>
+<h1 id="椭圆曲线中的阿贝尔群"><a href="#椭圆曲线中的阿贝尔群" class="headerlink" title="椭圆曲线中的阿贝尔群"></a>椭圆曲线中的阿贝尔群</h1><h2 id="阿贝尔群"><a href="#阿贝尔群" class="headerlink" title="阿贝尔群"></a>阿贝尔群</h2><p>一个集合以及一个二元运算所组成的结构满足如下条件(其中 “+” 表示某二院运算):</p>
+<p>1、封闭性(closure),如果a和b被包含于群,那么 a + b 也一定是群的元素<br>2、结合律(associativity)<br>3、存在一个单位元(identity element)0, 0与任意元素运算不改变其值的元素,即 a + 0 = 0 + a = a<br>4、每个元素都存在一个逆元(inverse)<br>5、交换律(commutativity),即 a + b = b + a</p>
+<h2 id="椭圆曲线中的阿贝尔群-1"><a href="#椭圆曲线中的阿贝尔群-1" class="headerlink" title="椭圆曲线中的阿贝尔群"></a>椭圆曲线中的阿贝尔群</h2><p>在椭圆曲线上定义一个群:</p>
+<p>1、群中的元素就是椭圆曲线上的点<br>2、单位元就是无穷处的点0<br>3、相反数P,是关于X轴对称的另一边的点<br>4、二元运算规则定义如下:取一条直线上的三点(这条直线和椭圆曲线相交的三点)P, Q, R（皆非零）,他们的总和等于0,即: P + Q + R = 0, 如果P,Q,R在一条直线上的话,他们满足: P + ( Q + R ) = Q + ( P + R ) = R + ( P + Q ) = ⋯ = 0,当P,Q点为同一点时,P = Q,满足: P + Q = -R</p>
+<p>推出:因为阿贝尔群满足交换律和结合律,所以点P和点-R的二元运算结果必会在曲线上,即 P + P + P 的结果必会在曲线上的另一点Q,以此类推,可以得出得出: Q = kP (k个相同的点P进行二元运（数乘),记做kP)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/03/18/elliptic-curve/" data-id="ckmmvgaen0000d12velsi0ju1" data-title="椭圆曲线加密" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cryptology/" rel="tag">cryptology</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ecdsa/" rel="tag">ecdsa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/elliptic-curve/" rel="tag">elliptic curve</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-openssl-update" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/03/04/openssl-update/" class="article-date">
+  <time class="dt-published" datetime="2020-03-04T09:04:51.000Z" itemprop="datePublished">2020-03-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/03/04/openssl-update/">openssl update</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="openssl-升级至-1-1-1d"><a href="#openssl-升级至-1-1-1d" class="headerlink" title="openssl 升级至 1.1.1d"></a>openssl 升级至 1.1.1d</h1><h2 id="下载openssl-1-1-1d"><a href="#下载openssl-1-1-1d" class="headerlink" title="下载openssl-1.1.1d"></a>下载openssl-1.1.1d</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/src/</span><br><span class="line">wget https://www.openssl.org/<span class="built_in">source</span>/openssl-1.1.1d.tar.gz</span><br><span class="line">tar xf openssl-1.1.1d.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h2 id="编译openssl"><a href="#编译openssl" class="headerlink" title="编译openssl"></a>编译openssl</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y install gcc zlib zlib-devel</span><br><span class="line"><span class="built_in">cd</span> openssl-1.1.1d</span><br><span class="line">./config --prefix=/usr/<span class="built_in">local</span>/openssl shared zlib</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置openssl-1-1-1d"><a href="#配置openssl-1-1-1d" class="headerlink" title="配置openssl-1.1.1d"></a>配置openssl-1.1.1d</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/bin/openssl /usr/bin/openssl.old</span><br><span class="line">ln -sf /usr/<span class="built_in">local</span>/openssl/bin/openssl /usr/bin/openssl</span><br><span class="line">ln -s /usr/<span class="built_in">local</span>/openssl/lib/libssl.so.1.1 /usr/lib64/libssl.so.1.1</span><br><span class="line">ln -s /usr/<span class="built_in">local</span>/openssl/lib/libcrypto.so.1.1 /usr/lib64/libcrypto.so.1.1</span><br><span class="line">sudo <span class="built_in">echo</span> <span class="string">&quot;/usr/local/openssl/lib/&quot;</span> &gt; /etc/ld.so.conf.d/openssl_1.1.1.conf</span><br><span class="line">sudo ldconfig -v </span><br><span class="line">/usr/bin/openssl version</span><br></pre></td></tr></table></figure>
+
+<h1 id="cmake-引用openssl-1-1-1d"><a href="#cmake-引用openssl-1-1-1d" class="headerlink" title="cmake 引用openssl-1.1.1d"></a>cmake 引用openssl-1.1.1d</h1><h2 id="find-package-引用-openssl-1-1-1d"><a href="#find-package-引用-openssl-1-1-1d" class="headerlink" title="find_package 引用 openssl-1.1.1d"></a>find_package 引用 openssl-1.1.1d</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required( VERSION 3.8 )</span><br><span class="line"></span><br><span class="line">project( <span class="built_in">test</span> )</span><br><span class="line"><span class="built_in">set</span>( OPENSSL_ROOT_DIR <span class="string">&quot;/usr/local/openssl&quot;</span> )</span><br><span class="line"><span class="built_in">set</span>( OPENSSL_INCLUDE_DIR <span class="string">&quot;/usr/local/openssl/include&quot;</span> )</span><br><span class="line"></span><br><span class="line">find_package( OpenSSL REQUIRED )</span><br><span class="line">message( <span class="string">&quot;OPENSSL_VERSION: &quot;</span> <span class="variable">$&#123;OPENSSL_VERSION&#125;</span> )</span><br><span class="line">message( <span class="string">&quot;OPENSSL_INCLUDE_DIR: &quot;</span> <span class="variable">$&#123;OPENSSL_INCLUDE_DIR&#125;</span> )</span><br><span class="line">message( <span class="string">&quot;OPENSSL_LIBRARIES: &quot;</span> <span class="variable">$&#123;OPENSSL_LIBRARIES&#125;</span> )</span><br></pre></td></tr></table></figure>
+
+<h2 id="pkg-search-module-引用-openssl-1-1-1d"><a href="#pkg-search-module-引用-openssl-1-1-1d" class="headerlink" title="pkg_search_module 引用 openssl-1.1.1d"></a>pkg_search_module 引用 openssl-1.1.1d</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required( VERSION 3.8 )</span><br><span class="line"></span><br><span class="line">project( <span class="built_in">test</span> )</span><br><span class="line"></span><br><span class="line">find_package( PkgConfig REQUIRED )</span><br><span class="line"><span class="built_in">set</span>(ENV&#123;PKG_CONFIG_PATH&#125;  <span class="string">&quot;/usr/local/openssl/lib/pkgconfig&quot;</span> )</span><br><span class="line">pkg_search_module( LIBCRYPTO REQUIRED libcrypt )</span><br><span class="line">message( <span class="string">&quot;LIBCRYPTO_VERSION: &quot;</span> <span class="variable">$&#123;LIBCRYPTO_VERSION&#125;</span> )</span><br><span class="line"></span><br><span class="line">pkg_search_module( LIBSSL REQUIRED libssl )</span><br><span class="line">message( <span class="string">&quot;LIBSSL_VERSION: &quot;</span> <span class="variable">$&#123;LIBSSL_VERSION&#125;</span> )</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/03/04/openssl-update/" data-id="ckmmvgaey0008d12v1txp4eo3" data-title="openssl update" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cmake/" rel="tag">cmake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/findpackage/" rel="tag">findpackage</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openssl/" rel="tag">openssl</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pkg-search-module/" rel="tag">pkg_search_module</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/02/24/hello-world/" class="article-date">
+  <time class="dt-published" datetime="2020-02-24T09:04:51.000Z" itemprop="datePublished">2020-02-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/02/24/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h3 id="enable-img"><a href="#enable-img" class="headerlink" title="enable img"></a>enable img</h3><ol>
+<li><p>在根目录下配置文件_config.yml 中有 post_asset_folder:false 改为 true</p>
+</li>
+<li><p>安装插件</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https://github.com/7ym0n/hexo-asset-image --save</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>应用图片</li>
+</ol>
+<p>_posts 目录下会有同名目录,文章中引用目录下的 test.jpg</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![说明文字](test.jpg)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/02/24/hello-world/" data-id="ckmmvgaes0001d12v6wpobpvm" data-title="Hello World" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/" rel="tag">Array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAS/" rel="tag">NAS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RT-AC68U/" rel="tag">RT-AC68U</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Uint8Array/" rel="tag">Uint8Array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/autonat/" rel="tag">autonat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/" rel="tag">cluster</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmake/" rel="tag">cmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cryptology/" rel="tag">cryptology</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dnat/" rel="tag">dnat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ecdsa/" rel="tag">ecdsa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elliptic-curve/" rel="tag">elliptic curve</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/findpackage/" rel="tag">findpackage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go-libp2p-autonat/" rel="tag">go-libp2p-autonat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hostAddr/" rel="tag">hostAddr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ipfs/" rel="tag">ipfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meilin/" rel="tag">meilin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nf-conntrack/" rel="tag">nf_conntrack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs-join/" rel="tag">nodejs join</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/" rel="tag">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pin/" rel="tag">pin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pkg-search-module/" rel="tag">pkg_search_module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/" rel="tag">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/repo-gc/" rel="tag">repo gc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tproxy/" rel="tag">tproxy</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Array/" style="font-size: 10px;">Array</a> <a href="/tags/NAS/" style="font-size: 10px;">NAS</a> <a href="/tags/RT-AC68U/" style="font-size: 10px;">RT-AC68U</a> <a href="/tags/Uint8Array/" style="font-size: 10px;">Uint8Array</a> <a href="/tags/autonat/" style="font-size: 10px;">autonat</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/cmake/" style="font-size: 10px;">cmake</a> <a href="/tags/cryptology/" style="font-size: 10px;">cryptology</a> <a href="/tags/dnat/" style="font-size: 10px;">dnat</a> <a href="/tags/ecdsa/" style="font-size: 10px;">ecdsa</a> <a href="/tags/elliptic-curve/" style="font-size: 10px;">elliptic curve</a> <a href="/tags/findpackage/" style="font-size: 10px;">findpackage</a> <a href="/tags/go-libp2p-autonat/" style="font-size: 10px;">go-libp2p-autonat</a> <a href="/tags/hostAddr/" style="font-size: 10px;">hostAddr</a> <a href="/tags/ipfs/" style="font-size: 20px;">ipfs</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/meilin/" style="font-size: 10px;">meilin</a> <a href="/tags/nf-conntrack/" style="font-size: 10px;">nf_conntrack</a> <a href="/tags/nodejs-join/" style="font-size: 10px;">nodejs join</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/pin/" style="font-size: 10px;">pin</a> <a href="/tags/pkg-search-module/" style="font-size: 10px;">pkg_search_module</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/repo-gc/" style="font-size: 10px;">repo gc</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/tproxy/" style="font-size: 10px;">tproxy</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/02/ipfs-3-autonat/">ipfs-3-autonat</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/13/ipfs-2-cluster/">ipfs cluster</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/08/ipfs-1-file-distribution/">ipfs 文件分发</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/10/traffic-interception/">流量拦截</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/01/router-meilin-rt-ac68u/">路由器 梅林 RT-AC68U</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 zidao Fan<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

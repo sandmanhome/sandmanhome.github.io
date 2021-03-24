@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>流量拦截 | sandman memo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="流量引导方案OTT设备中的app通常需要对视频、游戏加速, 广电等运营商网络中的IPTV终端需要进行内容管控及控制带宽成本, 各类终端(笔记本、路由器)等需要科学上网首先要解决的就是拦截本机流量并转发至远程代理. 下面以 linux 为例探讨本地流量引导技术方案 应用层拦截http 代理协议, 如 linux 系统设置全局http代理, 需要客户端系统主动设置, 可实现http流量全量引导, 应用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="流量拦截">
+<meta property="og:url" content="http://example.com/2020/04/10/traffic-interception/index.html">
+<meta property="og:site_name" content="sandman memo">
+<meta property="og:description" content="流量引导方案OTT设备中的app通常需要对视频、游戏加速, 广电等运营商网络中的IPTV终端需要进行内容管控及控制带宽成本, 各类终端(笔记本、路由器)等需要科学上网首先要解决的就是拦截本机流量并转发至远程代理. 下面以 linux 为例探讨本地流量引导技术方案 应用层拦截http 代理协议, 如 linux 系统设置全局http代理, 需要客户端系统主动设置, 可实现http流量全量引导, 应用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-10T09:46:46.000Z">
+<meta property="article:modified_time" content="2021-03-23T09:59:17.114Z">
+<meta property="article:author" content="zidao Fan">
+<meta property="article:tag" content="proxy">
+<meta property="article:tag" content="tproxy">
+<meta property="article:tag" content="nf_conntrack">
+<meta property="article:tag" content="iptables">
+<meta property="article:tag" content="dnat">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="sandman memo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<script src="/js/hexo_resize_image.js"></script>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">sandman memo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-traffic-interception" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/04/10/traffic-interception/" class="article-date">
+  <time class="dt-published" datetime="2020-04-10T09:46:46.000Z" itemprop="datePublished">2020-04-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      流量拦截
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="流量引导方案"><a href="#流量引导方案" class="headerlink" title="流量引导方案"></a>流量引导方案</h1><p>OTT设备中的app通常需要对视频、游戏加速, 广电等运营商网络中的IPTV终端需要进行内容管控及控制带宽成本, 各类终端(笔记本、路由器)等需要科学上网首先要解决的就是拦截本机流量并转发至远程代理. 下面以 <strong>linux</strong> 为例探讨本地流量引导技术方案</p>
+<h2 id="应用层拦截"><a href="#应用层拦截" class="headerlink" title="应用层拦截"></a>应用层拦截</h2><p>http 代理协议, 如 linux 系统设置全局http代理, 需要客户端系统主动设置, 可实现http流量全量引导, 应用层加速受协议限制较大</p>
+<h2 id="传输层拦截"><a href="#传输层拦截" class="headerlink" title="传输层拦截"></a>传输层拦截</h2><h3 id="引导方案"><a href="#引导方案" class="headerlink" title="引导方案"></a>引导方案</h3><ul>
+<li>通过添加 <code>iptables -t nat ... -j DNAT/REDIRECT ...</code> 规则实现流量转发至本地代理(远程代理),本地代理可对流量做二次过滤将流量转发到远程代理服务器或源站</li>
+</ul>
+<ol>
+<li><p><strong>DNAT</strong> 流量转发至远程代理, 通常用于特定端口转发, 远程代理无法知道原始目的地址, 按既定的加速服务处理请求</p>
+</li>
+<li><p><strong>REDIRECT/DNAT</strong> 流量转发至本地, 本地代理可以获取原始目的地址, 选择直接发送数据包至原站或发送数据包及原始目的地址到远程代理服务器加速</p>
+</li>
+<li><p><strong>tproxy</strong> 配合策略路由将流量引导至本地代理, 针对 <strong>udp</strong>, 具体做法是在 mangle 表的 <strong>PREROUTING</strong> 链中为每个 udp 数据包打上 0x2333/0x2333 标签并设定需获取报文信息的本地代理地址 <strong>127.0.0.1:1080</strong>, 策略路由设置将具有 <strong>0x2333/0x2333</strong> 标志的数据包投递到本地环回设备上的 <strong>1080</strong> 端口</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -t mangle -A PREROUTING -p udp -j tproxy --tproxy-mark 0x2333/0x2333 --on-ip 127.0.0.1 --on-port 1080</span><br><span class="line">ip rule add fwmark 0x2333/0x2333 pref 100 table 100</span><br><span class="line">ip route add <span class="built_in">local</span> default dev lo table 100</span><br></pre></td></tr></table></figure>
+<p>对监听 1080 端口的本地代理 socket 需设置 IP_TRANSPARENT 标志</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span></span><br><span class="line">create_server_socket(<span class="keyword">const</span> <span class="keyword">char</span> *host, <span class="keyword">const</span> <span class="keyword">char</span> *port)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> MODULE_REDIR</span></span><br><span class="line">        <span class="keyword">if</span> (setsockopt(server_sock, SOL_IP, IP_TRANSPARENT, &amp;opt, <span class="keyword">sizeof</span>(opt))) &#123;</span><br><span class="line">            ERROR(<span class="string">&quot;[udp] setsockopt IP_TRANSPARENT&quot;</span>);</span><br><span class="line">            <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (rp-&gt;ai_family == AF_INET) &#123;</span><br><span class="line">            <span class="keyword">if</span> (setsockopt(server_sock, SOL_IP, IP_RECVORIGDSTADDR, &amp;opt, <span class="keyword">sizeof</span>(opt))) &#123;</span><br><span class="line">                FATAL(<span class="string">&quot;[udp] setsockopt IP_RECVORIGDSTADDR&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (rp-&gt;ai_family == AF_INET6) &#123;</span><br><span class="line">            <span class="keyword">if</span> (setsockopt(server_sock, SOL_IPV6, IPV6_RECVORIGDSTADDR, &amp;opt, <span class="keyword">sizeof</span>(opt))) &#123;</span><br><span class="line">                FATAL(<span class="string">&quot;[udp] setsockopt IPV6_RECVORIGDSTADDR&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="本地代理原始目的地址获取"><a href="#本地代理原始目的地址获取" class="headerlink" title="本地代理原始目的地址获取"></a>本地代理原始目的地址获取</h3><ul>
+<li>tcp协议</li>
+</ul>
+<p>本地代理收到经 <code>iptables -t nat ... -j DNAT/REDIRECT ...</code> 转发后的tcp请求可采用 <strong>getsockopt(fd, SOL_IP, SO_ORIGINAL_DST, destaddr, &amp;socklen)</strong> 获取原始目的地址 <strong>destaddr</strong></p>
+<ul>
+<li>udp协议</li>
+</ul>
+<p>事实上在 linux 中对于上述 <strong>SO_ORIGINAL_DST</strong> 调用最终会调用 <strong>getorigdst</strong>, 因此 udp 协议无法使用 <strong>SO_ORIGINAL_DST</strong> 获取原始目的地址</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* We only do TCP and SCTP at the moment: is there a better way? */</span></span><br><span class="line"><span class="keyword">if</span> (tuple.dst.protonum != IPPROTO_TCP &amp;&amp;</span><br><span class="line">    tuple.dst.protonum != IPPROTO_SCTP) &#123;</span><br><span class="line">  pr_debug(<span class="string">&quot;SO_ORIGINAL_DST: Not a TCP/SCTP socket\n&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> -ENOPROTOOPT;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>tproxy 方案 udp 原始目的地址获取</li>
+</ol>
+<p>对监听 <strong>1080</strong> 端口的本地代理 <strong>socket</strong> 设置 <strong>IP_TRANSPARENT</strong> 标志后, 需调用 <strong>recvmsg</strong> 函数接收数据包,采用循环比对 <strong>IP_RECVORIGDSTADDR/IPV6_RECVORIGDSTADDR</strong> 获取原始目的地址</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span></span><br><span class="line">get_dstaddr(struct msghdr *msg, struct sockaddr_storage *dstaddr)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">cmsghdr</span> *<span class="title">cmsg</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (cmsg = CMSG_FIRSTHDR(msg); cmsg; cmsg = CMSG_NXTHDR(msg, cmsg)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (cmsg-&gt;cmsg_level == SOL_IP &amp;&amp; cmsg-&gt;cmsg_type == IP_RECVORIGDSTADDR) &#123;</span><br><span class="line">            <span class="built_in">memcpy</span>(dstaddr, CMSG_DATA(cmsg), <span class="keyword">sizeof</span>(struct sockaddr_in));</span><br><span class="line">            dstaddr-&gt;ss_family = AF_INET;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (cmsg-&gt;cmsg_level == SOL_IPV6 &amp;&amp; cmsg-&gt;cmsg_type == IPV6_RECVORIGDSTADDR) &#123;</span><br><span class="line">            <span class="built_in">memcpy</span>(dstaddr, CMSG_DATA(cmsg), <span class="keyword">sizeof</span>(struct sockaddr_in6));</span><br><span class="line">            dstaddr-&gt;ss_family = AF_INET6;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>REDIRECT/DNAT 方案 udp 原始目的地址获取</li>
+</ol>
+<p>上述 1. 中 <strong>tproxy</strong> 模块需要编译内核开启支持, 实际上 linux 内核采用 <strong>nf_conntrack</strong> 跟踪网络连接信息(包括udp), 此表可以通过**/proc/net/nf_conntrack** 查看, 里面包含tcp、udp的连接跟踪信息<br>本地代理接收到 <strong>REDIRECT/DNAT</strong> 的udp 数据包后, 可依据本地代理地址, 客户端地址, nat端口信息查询 <strong>nf_conntrack</strong> 表获取原始目的地址, 可参考 <a target="_blank" rel="noopener" href="http://www2.soopat.com/Patent/201610261388">一种UDP协议加速方法和系统</a></p>
+<h2 id="IP层拦截"><a href="#IP层拦截" class="headerlink" title="IP层拦截"></a>IP层拦截</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/04/10/traffic-interception/" data-id="ckmmvgafa001id12vhqpadpqh" data-title="流量拦截" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dnat/" rel="tag">dnat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nf-conntrack/" rel="tag">nf_conntrack</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/proxy/" rel="tag">proxy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tproxy/" rel="tag">tproxy</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/05/08/ipfs-1-file-distribution/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          ipfs 文件分发
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/01/router-meilin-rt-ac68u/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">路由器 梅林 RT-AC68U</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/" rel="tag">Array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAS/" rel="tag">NAS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RT-AC68U/" rel="tag">RT-AC68U</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Uint8Array/" rel="tag">Uint8Array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/autonat/" rel="tag">autonat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/" rel="tag">cluster</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmake/" rel="tag">cmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cryptology/" rel="tag">cryptology</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dnat/" rel="tag">dnat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ecdsa/" rel="tag">ecdsa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elliptic-curve/" rel="tag">elliptic curve</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/findpackage/" rel="tag">findpackage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go-libp2p-autonat/" rel="tag">go-libp2p-autonat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hostAddr/" rel="tag">hostAddr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ipfs/" rel="tag">ipfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meilin/" rel="tag">meilin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nf-conntrack/" rel="tag">nf_conntrack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs-join/" rel="tag">nodejs join</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/" rel="tag">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pin/" rel="tag">pin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pkg-search-module/" rel="tag">pkg_search_module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/" rel="tag">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/repo-gc/" rel="tag">repo gc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tproxy/" rel="tag">tproxy</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Array/" style="font-size: 10px;">Array</a> <a href="/tags/NAS/" style="font-size: 10px;">NAS</a> <a href="/tags/RT-AC68U/" style="font-size: 10px;">RT-AC68U</a> <a href="/tags/Uint8Array/" style="font-size: 10px;">Uint8Array</a> <a href="/tags/autonat/" style="font-size: 10px;">autonat</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/cmake/" style="font-size: 10px;">cmake</a> <a href="/tags/cryptology/" style="font-size: 10px;">cryptology</a> <a href="/tags/dnat/" style="font-size: 10px;">dnat</a> <a href="/tags/ecdsa/" style="font-size: 10px;">ecdsa</a> <a href="/tags/elliptic-curve/" style="font-size: 10px;">elliptic curve</a> <a href="/tags/findpackage/" style="font-size: 10px;">findpackage</a> <a href="/tags/go-libp2p-autonat/" style="font-size: 10px;">go-libp2p-autonat</a> <a href="/tags/hostAddr/" style="font-size: 10px;">hostAddr</a> <a href="/tags/ipfs/" style="font-size: 20px;">ipfs</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/meilin/" style="font-size: 10px;">meilin</a> <a href="/tags/nf-conntrack/" style="font-size: 10px;">nf_conntrack</a> <a href="/tags/nodejs-join/" style="font-size: 10px;">nodejs join</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/pin/" style="font-size: 10px;">pin</a> <a href="/tags/pkg-search-module/" style="font-size: 10px;">pkg_search_module</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/repo-gc/" style="font-size: 10px;">repo gc</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/tproxy/" style="font-size: 10px;">tproxy</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/02/ipfs-3-autonat/">ipfs-3-autonat</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/13/ipfs-2-cluster/">ipfs cluster</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/08/ipfs-1-file-distribution/">ipfs 文件分发</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/10/traffic-interception/">流量拦截</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/01/router-meilin-rt-ac68u/">路由器 梅林 RT-AC68U</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 zidao Fan<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

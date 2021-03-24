@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>ipfs-3-autonat | sandman memo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="hostAddr机制hostAddr查询与运用123456789101112131415ipfs id&amp;#123;        &quot;ID&quot;: &quot;bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg&quot;,        &quot;PublicKey&quot;: &quot;CAQSIQM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ipfs-3-autonat">
+<meta property="og:url" content="http://example.com/2020/09/02/ipfs-3-autonat/index.html">
+<meta property="og:site_name" content="sandman memo">
+<meta property="og:description" content="hostAddr机制hostAddr查询与运用123456789101112131415ipfs id&amp;#123;        &quot;ID&quot;: &quot;bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg&quot;,        &quot;PublicKey&quot;: &quot;CAQSIQM">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-02T03:03:16.000Z">
+<meta property="article:modified_time" content="2021-03-24T03:08:06.082Z">
+<meta property="article:author" content="zidao Fan">
+<meta property="article:tag" content="ipfs">
+<meta property="article:tag" content="autonat">
+<meta property="article:tag" content="go-libp2p-autonat">
+<meta property="article:tag" content="hostAddr">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="sandman memo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<script src="/js/hexo_resize_image.js"></script>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">sandman memo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-ipfs-3-autonat" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/09/02/ipfs-3-autonat/" class="article-date">
+  <time class="dt-published" datetime="2020-09-02T03:03:16.000Z" itemprop="datePublished">2020-09-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      ipfs-3-autonat
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="hostAddr机制"><a href="#hostAddr机制" class="headerlink" title="hostAddr机制"></a>hostAddr机制</h1><h2 id="hostAddr查询与运用"><a href="#hostAddr查询与运用" class="headerlink" title="hostAddr查询与运用"></a>hostAddr查询与运用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ipfs id</span><br><span class="line">&#123;</span><br><span class="line">        <span class="string">&quot;ID&quot;</span>: <span class="string">&quot;bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg&quot;</span>,</span><br><span class="line">        <span class="string">&quot;PublicKey&quot;</span>: <span class="string">&quot;CAQSIQMXKhfeoAepfrHLesbR+6QXV5EbBDoz/e1+g9DvUw7ABw==&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Addresses&quot;</span>: [</span><br><span class="line">                <span class="string">&quot;/ip4/127.0.0.1/tcp/4001/p2p/bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg&quot;</span>,</span><br><span class="line">                <span class="string">&quot;/ip4/192.168.100.242/tcp/4001/p2p/bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg&quot;</span>,</span><br><span class="line">                <span class="string">&quot;/ip6/::1/tcp/4001/p2p/bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg&quot;</span>,</span><br><span class="line">                <span class="string">&quot;/ip6/fe80::7adc:71f6:25a4:40e0/tcp/4001/p2p/bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg&quot;</span>,</span><br><span class="line">                <span class="string">&quot;/dns4/xxx.baasze.com/tcp/4001/p2p/bafzm3jqbec7ulhfmm7s7ydt2mf32nbsjy4237mvzj5skzbkxrfxz7axghsyum/p2p-circuit/p2p/bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg&quot;</span>,</span><br><span class="line">                <span class="string">&quot;/ip4/xx.xx.xx.xx/tcp/4001/p2p/bafzm3jqbec7ulhfmm7s7ydt2mf32nbsjy4237mvzj5skzbkxrfxz7axghsyum/p2p-circuit/p2p/bafzm3jqbeczaadu3v52hvjplcll7zsydxibzipg5yaxij3hmdhskysc52sdxg&quot;</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">&quot;AgentVersion&quot;</span>: <span class="string">&quot;go-ipfs/0.3.4/183988a&quot;</span>,</span><br><span class="line">        <span class="string">&quot;ProtocolVersion&quot;</span>: <span class="string">&quot;ipfs/0.1.0&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ipfs id</code> 命令可显示ipfs节点信息，其中Addresses为服务地址即hostAddr, ipfs 会将hostAddr广播出去, 其余节点会利用hostAddr的地址进行连接, 因此通过hostAddr能否连接节点是 <strong>节点互联的关键</strong>.</p>
+<h2 id="hostAddr的初始化"><a href="#hostAddr的初始化" class="headerlink" title="hostAddr的初始化"></a>hostAddr的初始化</h2><p>ipfs 启动后默认监听 “/ip4/0.0.0.0/tcp/0” “/ip6/::/tcp/0”, 此时 ipfs 查询本机各网卡地址并进行监听, 复杂网络环境下有如下几种情况:</p>
+<ul>
+<li><p>云主机通常采用经典网络模式分配的ECS固定公网IP, 在本机网卡上可见公网ip, 因此hostAddr的可查询到此公网ip</p>
+</li>
+<li><p>云主机通常采用弹性公网ip <strong>EIP（Elastic IP Address</strong>）访问, 在主机上网卡上不可见公网ip,因此hostAddr的 <strong>无法查询到此公网ip</strong></p>
+</li>
+</ul>
+<h2 id="hostAddr的更新"><a href="#hostAddr的更新" class="headerlink" title="hostAddr的更新"></a>hostAddr的更新</h2><p>对于部署在无外网网卡ip主机的ipfs, 若依靠广播初始化后的hostAddr, 无法被其余节点主动连接, 即 Inbound 无法走通, 因此 libp2p 设计了autonat、autorelay等机制</p>
+<p>注: <strong>fix host can be dialed by autonat public addr, but lost the public addr to announce</strong> <strong>此pr修复了hostAddr更新缺失EIP的情况,已被合并</strong>.</p>
+<h1 id="autonat机制"><a href="#autonat机制" class="headerlink" title="autonat机制"></a>autonat机制</h1><h2 id="autonat基本原理"><a href="#autonat基本原理" class="headerlink" title="autonat基本原理"></a>autonat基本原理</h2><p><strong>go-libp2p-autonat</strong> 运用remotePeer（对端节点）<strong>DialBack(回拨)机制</strong> 来获取自身服务的外网IP及端口, 其过程如下:</p>
+<ol>
+<li><p>全网中开启autonat service的某节点A, 该节点在p2p网络中支持 <strong>autonat协议（”/libp2p/autonat/1.0.0”）</strong></p>
+</li>
+<li><p>节点B主动连接上支持 autonat service的节点, 此连接为后续协议交互的连接, 包括 <strong>identify协议</strong> 和 <strong>autonat协议</strong></p>
+</li>
+<li><p>节点B在与A完成身份认证后判断节点A是否支持autonat协议, 若支持则由节点B的 autonat client 发起公网地址拨号请求(DialBack)</p>
+</li>
+<li><p>节点A的autonat service 收到DialBack请求后对节点B进行DialBack <strong>(回拨的地址为节点B的hostAddr以及已有连接的节点B地址)</strong>, 并将结果observations（包含Multiaddr及Reachability）发送给节点B</p>
+</li>
+<li><p>节点B根据DialBack的结果判断自身是 ReachabilityPublic 还是 ReachabilityPrivate, 并补充更新 hostAddr</p>
+</li>
+</ol>
+<h2 id="autonat优化"><a href="#autonat优化" class="headerlink" title="autonat优化"></a>autonat优化</h2><p>除了上述基本功能外, autonat还做了一些额外的优化</p>
+<ol>
+<li><p>节点B启动动态定时器主动对Peerstore的节点进行autonat协议探测以便获取自身最新的nat状态</p>
+</li>
+<li><p>对于网络状态的翻转（flipping)设定一个confidence, confidence的增加代表对当前状态的自信心（[0,3]）, 根据是否翻转以及confidence的值决定是否触发网络状态的改变, 修改hostAddr</p>
+</li>
+<li><p>confidence小于最大值时, 1.的探测定时器为固定时长(15 min), 否则对探测定时器做如下调整</p>
+</li>
+<li><p>当为外网可访问状态时，若最新的外网节点主动连接（Inbound Conn)成功且比最新的探测时间晚, 则延长1.的探测定时器时长, 段时间虚无继续探测</p>
+</li>
+</ol>
+<p>5.当为外网不可访问状态时，若最新的外网节点主动连接（Inbound Conn)成功且比最新的探测时间晚, 减小1.的探测定时器时长以变获取最新的外网地址</p>
+<p>总结: 目前ipfs中默认开启了autonat service及autonat探测</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/09/02/ipfs-3-autonat/" data-id="ckmmvgaew0005d12v6q2x38co" data-title="ipfs-3-autonat" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/autonat/" rel="tag">autonat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go-libp2p-autonat/" rel="tag">go-libp2p-autonat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hostAddr/" rel="tag">hostAddr</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ipfs/" rel="tag">ipfs</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/05/13/ipfs-2-cluster/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">ipfs cluster</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/" rel="tag">Array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAS/" rel="tag">NAS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RT-AC68U/" rel="tag">RT-AC68U</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Uint8Array/" rel="tag">Uint8Array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/autonat/" rel="tag">autonat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/" rel="tag">cluster</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmake/" rel="tag">cmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cryptology/" rel="tag">cryptology</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dnat/" rel="tag">dnat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ecdsa/" rel="tag">ecdsa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elliptic-curve/" rel="tag">elliptic curve</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/findpackage/" rel="tag">findpackage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go-libp2p-autonat/" rel="tag">go-libp2p-autonat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hostAddr/" rel="tag">hostAddr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ipfs/" rel="tag">ipfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meilin/" rel="tag">meilin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nf-conntrack/" rel="tag">nf_conntrack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs-join/" rel="tag">nodejs join</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/" rel="tag">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pin/" rel="tag">pin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pkg-search-module/" rel="tag">pkg_search_module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/" rel="tag">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/repo-gc/" rel="tag">repo gc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tproxy/" rel="tag">tproxy</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Array/" style="font-size: 10px;">Array</a> <a href="/tags/NAS/" style="font-size: 10px;">NAS</a> <a href="/tags/RT-AC68U/" style="font-size: 10px;">RT-AC68U</a> <a href="/tags/Uint8Array/" style="font-size: 10px;">Uint8Array</a> <a href="/tags/autonat/" style="font-size: 10px;">autonat</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/cmake/" style="font-size: 10px;">cmake</a> <a href="/tags/cryptology/" style="font-size: 10px;">cryptology</a> <a href="/tags/dnat/" style="font-size: 10px;">dnat</a> <a href="/tags/ecdsa/" style="font-size: 10px;">ecdsa</a> <a href="/tags/elliptic-curve/" style="font-size: 10px;">elliptic curve</a> <a href="/tags/findpackage/" style="font-size: 10px;">findpackage</a> <a href="/tags/go-libp2p-autonat/" style="font-size: 10px;">go-libp2p-autonat</a> <a href="/tags/hostAddr/" style="font-size: 10px;">hostAddr</a> <a href="/tags/ipfs/" style="font-size: 20px;">ipfs</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/meilin/" style="font-size: 10px;">meilin</a> <a href="/tags/nf-conntrack/" style="font-size: 10px;">nf_conntrack</a> <a href="/tags/nodejs-join/" style="font-size: 10px;">nodejs join</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/pin/" style="font-size: 10px;">pin</a> <a href="/tags/pkg-search-module/" style="font-size: 10px;">pkg_search_module</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/repo-gc/" style="font-size: 10px;">repo gc</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/tproxy/" style="font-size: 10px;">tproxy</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/02/ipfs-3-autonat/">ipfs-3-autonat</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/13/ipfs-2-cluster/">ipfs cluster</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/08/ipfs-1-file-distribution/">ipfs 文件分发</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/10/traffic-interception/">流量拦截</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/01/router-meilin-rt-ac68u/">路由器 梅林 RT-AC68U</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 zidao Fan<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
